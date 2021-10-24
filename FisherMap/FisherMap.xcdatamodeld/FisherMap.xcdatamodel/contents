@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="20G165" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Locationdata" representedClassName="Locationdata" syncable="YES" codeGenerationType="class">
+        <attribute name="cLat" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="cLon" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="createDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="favorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="imageName" optional="YES" attributeType="String"/>
+        <attribute name="locName" optional="YES" attributeType="String"/>
+        <attribute name="locNote" optional="YES" attributeType="String"/>
+        <attribute name="locSub" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="Locationdata" positionX="-63" positionY="-18" width="128" height="164"/>
+    </elements>
+</model>

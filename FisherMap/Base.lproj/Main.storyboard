@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Suz-Q9-fig">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController storyboardIdentifier="mainVC" id="BYZ-38-t0r" customClass="ViewController" customModule="FisherMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="kr5-gk-rQh">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </mapView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="kr5-gk-rQh" secondAttribute="bottom" id="CXG-Wj-30o"/>
+                            <constraint firstItem="kr5-gk-rQh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Dug-BT-6VS"/>
+                            <constraint firstItem="kr5-gk-rQh" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="OSo-Zv-juz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kr5-gk-rQh" secondAttribute="trailing" id="ac8-9q-uDk"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="WuF-HU-stK">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="rectangle.grid.1x2.fill" catalog="system" id="QXy-9A-sW3">
+                            <connections>
+                                <action selector="menuBtn:" destination="BYZ-38-t0r" id="xgU-Bg-lkx"/>
+                            </connections>
+                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Item" image="map.fill" catalog="system" id="Rhu-CX-1ml">
+                                <connections>
+                                    <action selector="mapButton:" destination="BYZ-38-t0r" id="siS-Gr-YRk"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="location.fill" catalog="system" id="nNb-LF-O7b">
+                                <connections>
+                                    <action selector="golocationButton:" destination="BYZ-38-t0r" id="KNc-MP-Coq"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="kr5-gk-rQh" id="PzK-og-kyA"/>
+                        <segue destination="zZZ-Kh-kDE" kind="show" identifier="weather" id="2bf-57-XvU"/>
+                        <segue destination="9Wz-BO-BlF" kind="show" identifier="help" id="che-AE-di0"/>
+                        <segue destination="7o0-Ye-Wsb" kind="show" identifier="settings" id="fxJ-as-DqG"/>
+                        <segue destination="7bj-ID-VpT" kind="show" identifier="solunar" id="vJs-bq-Ktg"/>
+                        <segue destination="e29-RD-oGb" kind="show" identifier="catches" id="u74-0X-q1g"/>
+                        <segue destination="KGv-3N-GXi" kind="show" identifier="locations" id="3FI-qg-c3Z"/>
+                        <segue destination="twP-Zk-XD1" kind="show" identifier="buying" id="ygM-qg-um5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="974" y="78"/>
+        </scene>
+        <!--BuyingVC-->
+        <scene sceneID="6k0-YR-gut">
+            <objects>
+                <viewController id="twP-Zk-XD1" customClass="buyingVC" customModule="FisherMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ASd-Eq-DtS">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="m2j-3H-LHr"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="iiI-9y-7FZ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9ny-Eq-Sta" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="581" y="1190"/>
+        </scene>
+        <!--LocationsVC-->
+        <scene sceneID="OkE-3x-UXO">
+            <objects>
+                <viewController id="KGv-3N-GXi" customClass="locationsVC" customModule="FisherMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="o68-qx-jvP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="ZLz-Io-GM2"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ASR-Dv-fDN"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="txF-ZT-Ggd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1365" y="1134"/>
+        </scene>
+        <!--CatchesVC-->
+        <scene sceneID="2FP-dh-Qyg">
+            <objects>
+                <viewController id="e29-RD-oGb" customClass="catchesVC" customModule="FisherMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="U63-As-1qi">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="N0j-oF-xMT"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Uwz-Bl-omP"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dW7-GT-rfY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1891" y="1732"/>
+        </scene>
+        <!--WeatherVC-->
+        <scene sceneID="Kqs-ND-YPO">
+            <objects>
+                <viewController storyboardIdentifier="weatherVC" id="zZZ-Kh-kDE" customClass="weatherVC" customModule="FisherMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Fbi-QX-yKK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="aho-r0-oR6"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="cFI-Oa-gjU"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cCZ-Mo-uME" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2834.7826086956525" y="1030.5803571428571"/>
+        </scene>
+        <!--HelpVC-->
+        <scene sceneID="C6k-Nd-DHo">
+            <objects>
+                <viewController storyboardIdentifier="helpVC" id="9Wz-BO-BlF" customClass="helpVC" customModule="FisherMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="E2r-HS-Nfp">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="pFa-vv-Ro7"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Prm-fx-Rlg"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0tP-5B-tmI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5001" y="895"/>
+        </scene>
+        <!--SolunarVC-->
+        <scene sceneID="6Ty-x9-kF0">
+            <objects>
+                <viewController id="7bj-ID-VpT" customClass="solunarVC" customModule="FisherMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fe5-Sv-Toc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WyH-JT-muO">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vo7-DM-uta">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rrf-5V-YhT">
+                                        <rect key="frame" x="8" y="183" width="398" height="93"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                        <connections>
+                                            <segue destination="xO5-WA-bwW" kind="embed" id="POA-WY-LOA"/>
+                                        </connections>
+                                    </containerView>
+                                    <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yNg-os-pmw">
+                                        <rect key="frame" x="8" y="284" width="398" height="166"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                        <connections>
+                                            <segue destination="lNX-q9-Urr" kind="embed" id="DqW-Y4-v0U"/>
+                                        </connections>
+                                    </containerView>
+                                    <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wYn-K3-3Qk">
+                                        <rect key="frame" x="8" y="459" width="197" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                        <connections>
+                                            <segue destination="wLw-rU-U17" kind="embed" id="uvg-cd-1yF"/>
+                                        </connections>
+                                    </containerView>
+                                    <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bOS-vb-LIZ" userLabel="SunsetC View">
+                                        <rect key="frame" x="213" y="459" width="193" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                        <connections>
+                                            <segue destination="6kT-W4-rQ5" kind="embed" id="Ywj-wc-xMR"/>
+                                        </connections>
+                                    </containerView>
+                                    <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dHm-hV-YKT">
+                                        <rect key="frame" x="8" y="595" width="197" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                        <connections>
+                                            <segue destination="8Vv-fd-B4U" kind="embed" id="xFI-Zg-xTp"/>
+                                        </connections>
+                                    </containerView>
+                                    <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ixw-Lr-wai">
+                                        <rect key="frame" x="213" y="595" width="193" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                        <connections>
+                                            <segue destination="Cyn-rP-Xq0" kind="embed" identifier="humidity" id="zQh-ai-aIr"/>
+                                        </connections>
+                                    </containerView>
+                                    <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tsy-Sk-qTe">
+                                        <rect key="frame" x="8" y="731" width="197" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                        <connections>
+                                            <segue destination="w9G-Ys-5NB" kind="embed" id="7v9-kv-rW0"/>
+                                        </connections>
+                                    </containerView>
+                                    <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4v3-g1-iK7">
+                                        <rect key="frame" x="213" y="731" width="193" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                        <connections>
+                                            <segue destination="cD4-d0-YYx" kind="embed" id="XFv-gM-0RI"/>
+                                        </connections>
+                                    </containerView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Weather Forecast Location " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="drl-hw-plX">
+                                        <rect key="frame" x="80" y="76" width="239" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TEMP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="17t-1f-zQ9">
+                                        <rect key="frame" x="80" y="111" width="239" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Weather Descripton" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zfe-fB-HJT">
+                                        <rect key="frame" x="80" y="143" width="239" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Daily High-Low Temp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ksj-Aj-ulM">
+                                        <rect key="frame" x="80" y="162" width="239" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Clear" translatesAutoresizingMaskIntoConstraints="NO" id="Dx6-6V-vQI">
+                                        <rect key="frame" x="312" y="105" width="60" height="60"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="PNB-Uw-JCW"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="j2Y-rd-gff"/>
+                    <connections>
+                        <outlet property="SunsetCView" destination="bOS-vb-LIZ" id="7bD-6g-Znn"/>
+                        <outlet property="backImageView" destination="WyH-JT-muO" id="x33-72-3E0"/>
+                        <outlet property="cloudsCView" destination="wYn-K3-3Qk" id="QNQ-vw-ZWQ"/>
+                        <outlet property="eyeshotCView" destination="Tsy-Sk-qTe" id="XpT-Xb-UiC"/>
+                        <outlet property="hourlyCView" destination="Rrf-5V-YhT" id="Sod-o2-v3T"/>
+                        <outlet property="humidityCView" destination="4v3-g1-iK7" id="feK-Bv-yFu"/>
+                        <outlet property="mainScrollView" destination="Vo7-DM-uta" id="fiq-Bv-VzQ"/>
+                        <outlet property="sunriseCView" destination="Ixw-Lr-wai" id="m2d-4f-uhM"/>
+                        <outlet property="weeklyCView" destination="yNg-os-pmw" id="6i9-k9-jt2"/>
+                        <outlet property="wfDescLabel" destination="Zfe-fB-HJT" id="3hj-g9-pIl"/>
+                        <outlet property="wfImageView" destination="Dx6-6V-vQI" id="fLo-Gc-H6H"/>
+                        <outlet property="wfLocationLabel" destination="drl-hw-plX" id="qCo-7U-cUe"/>
+                        <outlet property="wfTempLabel" destination="17t-1f-zQ9" id="6Jd-U9-uc9"/>
+                        <outlet property="wftempHLLabel" destination="ksj-Aj-ulM" id="nRe-k8-wVo"/>
+                        <outlet property="windCView" destination="dHm-hV-YKT" id="jEP-32-cL8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WIX-0a-1Rr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3528.985507246377" y="1716.9642857142856"/>
+        </scene>
+        <!--SettingsVC-->
+        <scene sceneID="cQK-hL-6Wc">
+            <objects>
+                <viewController storyboardIdentifier="settingsVC" id="7o0-Ye-Wsb" customClass="settingsVC" customModule="FisherMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7BP-a4-oVP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="wNs-pC-MTb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="uAf-AS-u2c"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Cz-8q-mWE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4307" y="840"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="SwV-J7-QAc">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Suz-Q9-fig" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="dJ8-Iu-zuD"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackTranslucent" id="ucg-fh-hEW">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="NiG-cS-Nw3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aA1-H6-0Zv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-77" y="78"/>
+        </scene>
+        <!--HourlyVC-->
+        <scene sceneID="xIJ-Jb-1PY">
+            <objects>
+                <viewController id="xO5-WA-bwW" customClass="HourlyVC" customModule="FisherMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qwX-Rl-6eP">
+                        <rect key="frame" x="0.0" y="0.0" width="398" height="93"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="4ef-dX-bec"/>
+                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Qy-im-DC1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4306" y="1448"/>
+        </scene>
+        <!--WeeklyVC-->
+        <scene sceneID="cgj-QB-234">
+            <objects>
+                <viewController id="lNX-q9-Urr" customClass="WeeklyVC" customModule="FisherMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0vn-of-TL4">
+                        <rect key="frame" x="0.0" y="0.0" width="398" height="166"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="DK9-cZ-w49"/>
+                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f8J-rq-8nj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4448" y="1623"/>
+        </scene>
+        <!--CloudsVC-->
+        <scene sceneID="EEw-Rn-cec">
+            <objects>
+                <viewController id="wLw-rU-U17" customClass="CloudsVC" customModule="FisherMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dMa-lS-ayw">
+                        <rect key="frame" x="0.0" y="0.0" width="197" height="128"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="enm-KN-W33">
+                                <rect key="frame" x="12" y="44" width="158" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="jsl-gw-9Bc"/>
+                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="cloudsLabel" destination="enm-KN-W33" id="iEi-Vt-cos"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="flH-5S-aet" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4748.5507246376819" y="1810.7142857142856"/>
+        </scene>
+        <!--SunsetVC-->
+        <scene sceneID="fzq-85-5df">
+            <objects>
+                <viewController id="6kT-W4-rQ5" customClass="SunsetVC" customModule="FisherMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5bg-rk-Jzh">
+                        <rect key="frame" x="0.0" y="0.0" width="193" height="128"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UrC-q1-XPd">
+                                <rect key="frame" x="45" y="44" width="111" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="v1a-Ng-cOX"/>
+                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="sunsetLabel" destination="UrC-q1-XPd" id="o1V-Ux-WJ4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5V7-0I-0Yy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4284.7826086956529" y="1841.5178571428571"/>
+        </scene>
+        <!--WindVC-->
+        <scene sceneID="X1c-oM-3e0">
+            <objects>
+                <viewController id="8Vv-fd-B4U" customClass="WindVC" customModule="FisherMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eKy-k8-W77">
+                        <rect key="frame" x="0.0" y="0.0" width="197" height="128"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CKP-ip-uWu">
+                                <rect key="frame" x="16" y="54" width="165" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="bIK-vi-UV7"/>
+                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="windLabel" destination="CKP-ip-uWu" id="9gk-zT-sI9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vJ9-1E-nOR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4447.1014492753629" y="1974.7767857142856"/>
+        </scene>
+        <!--SunriseVC-->
+        <scene sceneID="6sg-Bb-nfx">
+            <objects>
+                <viewController id="Cyn-rP-Xq0" customClass="SunriseVC" customModule="FisherMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Vzm-qr-5ag">
+                        <rect key="frame" x="0.0" y="0.0" width="193" height="128"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Wj-ql-Bgy">
+                                <rect key="frame" x="31" y="54" width="146" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="pGA-Qq-Q7b"/>
+                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="sunriseLabel" destination="5Wj-ql-Bgy" id="BEy-Od-lLQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0y6-bc-7yp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4871.739130434783" y="2077.9017857142858"/>
+        </scene>
+        <!--EyeshotVC-->
+        <scene sceneID="I5U-yx-hRA">
+            <objects>
+                <viewController id="w9G-Ys-5NB" customClass="EyeshotVC" customModule="FisherMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Rh8-ID-jYD">
+                        <rect key="frame" x="0.0" y="0.0" width="197" height="128"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RZb-1i-nkJ">
+                                <rect key="frame" x="37" y="54" width="123" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Wui-tW-h21"/>
+                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="eyeshotLabel" destination="RZb-1i-nkJ" id="Uvp-u7-K0X"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kEs-18-ei1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4300.7246376811599" y="2173.6607142857142"/>
+        </scene>
+        <!--HumidtyVC-->
+        <scene sceneID="qwC-Uj-Aa6">
+            <objects>
+                <viewController id="cD4-d0-YYx" customClass="HumidtyVC" customModule="FisherMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3uK-Yr-oR4">
+                        <rect key="frame" x="0.0" y="0.0" width="193" height="128"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a10-o4-c1t">
+                                <rect key="frame" x="43" y="54" width="114" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="9yH-Pm-SQk"/>
+                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="humidtyLabel" destination="a10-o4-c1t" id="8bI-hF-OR5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tne-DX-58i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4745.652173913044" y="2333.0357142857142"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Clear" width="512" height="512"/>
+        <image name="location.fill" catalog="system" width="128" height="121"/>
+        <image name="map.fill" catalog="system" width="128" height="110"/>
+        <image name="rectangle.grid.1x2.fill" catalog="system" width="128" height="101"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

@@ -1,0 +1,22 @@
+PODS:
+  - NVActivityIndicatorView (5.1.1):
+    - NVActivityIndicatorView/Base (= 5.1.1)
+  - NVActivityIndicatorView/Base (5.1.1)
+  - SideMenu (6.5.0)
+
+DEPENDENCIES:
+  - NVActivityIndicatorView
+  - SideMenu
+
+SPEC REPOS:
+  trunk:
+    - NVActivityIndicatorView
+    - SideMenu
+
+SPEC CHECKSUMS:
+  NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
+  SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
+
+PODFILE CHECKSUM: f36b7e177456c9e22f1b364b11e9c8f8a2b5673b
+
+COCOAPODS: 1.10.0

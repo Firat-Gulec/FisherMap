@@ -1,0 +1,24 @@
+//SideMenu Strings
+"Start 7- Day Free Trial" = "7 Gün Bedava Kullanım";
+"Map" = "Harita";
+"Locations" = "Konumlar";
+"Catches" = "Kaçırılanlar";
+"Weather" = "Hava Durumu";
+"Solunar" = "Ay Bilgisi";
+"Settings" = "Ayarlar";
+"Help" = "Yardım";
+"Fishing Points" = "Balık Noktaları";
+"Current conditions" = "Mevcut Koşullar";
+"SUNSET" = "GÜN DOĞUMU";
+"SUNRISE" = "GÜN BATIŞI";
+"SY9-V7-rfo.text" = "GÜN DOĞUMU";
+"Waxing Crescent" = "Ay Hilal";
+"Waxing Gibbous" = "Şişkin Ay";
+"Waning Crescent" = "Ay Hilal";
+"Waning Gibbous" = "Şişkin Ay";
+"First Quather" = "İlk Dördün Ay";
+"Third Quarther" = "Son Dördün Ay";
+"Full Moon" = "Dolunay";
+"New Moon" = "Yeni Ay";
+
+
