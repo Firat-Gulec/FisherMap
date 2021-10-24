@@ -69,7 +69,7 @@ class WeeklyVC: UIViewController {
         //loading.frame = CGRect(x: 10, y: 10, width: 40, height: 40)
         loading.startAnimating()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
-            //self.mainLabel.text = self.descrip[1]
+            //self.mainLabel.text = self.descrip[1] - degisikliks
             loading.stopAnimating()
             
             self.data = [
