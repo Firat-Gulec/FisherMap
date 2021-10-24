@@ -71,7 +71,7 @@ class WeeklyVC: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
             //self.mainLabel.text = self.descrip[1] - degisikliks
             loading.stopAnimating()
-            
+            ///bu kısım yeniden 
             self.data = [
                 WeeklyData(mainn: self.main[0], tempp: self.temp[0], temp_maxx: self.temp_max[0], temp_minn: self.temp_min[0], humidityy: self.humidity[0], descripp: self.descrip[0], date: self.dt_txt[0]),
                 WeeklyData(mainn: self.main[1], tempp: self.temp[1], temp_maxx: self.temp_max[1], temp_minn: self.temp_min[1], humidityy: self.humidity[1], descripp: self.descrip[1], date: self.dt_txt[1]),
