@@ -69,52 +69,11 @@ class WeeklyVC: UIViewController {
         //loading.frame = CGRect(x: 10, y: 10, width: 40, height: 40)
         loading.startAnimating()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
-            //self.mainLabel.text = self.descrip[1] - degisikliks
             loading.stopAnimating()
-            ///bu kısım yeniden 
-            self.data = [
-                WeeklyData(mainn: self.main[0], tempp: self.temp[0], temp_maxx: self.temp_max[0], temp_minn: self.temp_min[0], humidityy: self.humidity[0], descripp: self.descrip[0], date: self.dt_txt[0]),
-                WeeklyData(mainn: self.main[1], tempp: self.temp[1], temp_maxx: self.temp_max[1], temp_minn: self.temp_min[1], humidityy: self.humidity[1], descripp: self.descrip[1], date: self.dt_txt[1]),
-                WeeklyData(mainn: self.main[2], tempp: self.temp[2], temp_maxx: self.temp_max[2], temp_minn: self.temp_min[2], humidityy: self.humidity[2], descripp: self.descrip[2], date: self.dt_txt[2]),
-                WeeklyData(mainn: self.main[3], tempp: self.temp[3], temp_maxx: self.temp_max[3], temp_minn: self.temp_min[3], humidityy: self.humidity[3], descripp: self.descrip[3], date: self.dt_txt[3]),
-                WeeklyData(mainn: self.main[4], tempp: self.temp[4], temp_maxx: self.temp_max[4], temp_minn: self.temp_min[4], humidityy: self.humidity[4], descripp: self.descrip[4], date: self.dt_txt[4]),
-                WeeklyData(mainn: self.main[5], tempp: self.temp[5], temp_maxx: self.temp_max[5], temp_minn: self.temp_min[5], humidityy: self.humidity[5], descripp: self.descrip[5], date: self.dt_txt[5]),
-                WeeklyData(mainn: self.main[6], tempp: self.temp[6], temp_maxx: self.temp_max[6], temp_minn: self.temp_min[6], humidityy: self.humidity[6], descripp: self.descrip[6], date: self.dt_txt[6]),
-                WeeklyData(mainn: self.main[7], tempp: self.temp[7], temp_maxx: self.temp_max[7], temp_minn: self.temp_min[7], humidityy: self.humidity[7], descripp: self.descrip[7], date: self.dt_txt[7]),
-                WeeklyData(mainn: self.main[8], tempp: self.temp[8], temp_maxx: self.temp_max[8], temp_minn: self.temp_min[8], humidityy: self.humidity[8], descripp: self.descrip[8], date: self.dt_txt[8]),
-                WeeklyData(mainn: self.main[9], tempp: self.temp[9], temp_maxx: self.temp_max[9], temp_minn: self.temp_min[9], humidityy: self.humidity[9], descripp: self.descrip[9], date: self.dt_txt[9]),
-                WeeklyData(mainn: self.main[10], tempp: self.temp[10], temp_maxx: self.temp_max[10], temp_minn: self.temp_min[10], humidityy: self.humidity[10], descripp: self.descrip[10], date: self.dt_txt[10]),
-                WeeklyData(mainn: self.main[11], tempp: self.temp[11], temp_maxx: self.temp_max[11], temp_minn: self.temp_min[11], humidityy: self.humidity[11], descripp: self.descrip[11], date: self.dt_txt[11]),
-                WeeklyData(mainn: self.main[12], tempp: self.temp[12], temp_maxx: self.temp_max[12], temp_minn: self.temp_min[12], humidityy: self.humidity[12], descripp: self.descrip[12], date: self.dt_txt[12]),
-                WeeklyData(mainn: self.main[13], tempp: self.temp[13], temp_maxx: self.temp_max[13], temp_minn: self.temp_min[13], humidityy: self.humidity[13], descripp: self.descrip[13], date: self.dt_txt[13]),
-                WeeklyData(mainn: self.main[14], tempp: self.temp[14], temp_maxx: self.temp_max[14], temp_minn: self.temp_min[14], humidityy: self.humidity[14], descripp: self.descrip[14], date: self.dt_txt[14]),
-                WeeklyData(mainn: self.main[15], tempp: self.temp[15], temp_maxx: self.temp_max[15], temp_minn: self.temp_min[15], humidityy: self.humidity[15], descripp: self.descrip[15], date: self.dt_txt[15]),
-                WeeklyData(mainn: self.main[16], tempp: self.temp[16], temp_maxx: self.temp_max[16], temp_minn: self.temp_min[16], humidityy: self.humidity[16], descripp: self.descrip[16], date: self.dt_txt[16]),
-                WeeklyData(mainn: self.main[17], tempp: self.temp[17], temp_maxx: self.temp_max[17], temp_minn: self.temp_min[17], humidityy: self.humidity[17], descripp: self.descrip[17], date: self.dt_txt[17]),
-                WeeklyData(mainn: self.main[18], tempp: self.temp[18], temp_maxx: self.temp_max[18], temp_minn: self.temp_min[18], humidityy: self.humidity[18], descripp: self.descrip[18], date: self.dt_txt[18]),
-                WeeklyData(mainn: self.main[19], tempp: self.temp[19], temp_maxx: self.temp_max[19], temp_minn: self.temp_min[19], humidityy: self.humidity[19], descripp: self.descrip[19], date: self.dt_txt[19]),
-                WeeklyData(mainn: self.main[20], tempp: self.temp[20], temp_maxx: self.temp_max[20], temp_minn: self.temp_min[20], humidityy: self.humidity[20], descripp: self.descrip[20], date: self.dt_txt[20]),
-                WeeklyData(mainn: self.main[21], tempp: self.temp[21], temp_maxx: self.temp_max[21], temp_minn: self.temp_min[21], humidityy: self.humidity[21], descripp: self.descrip[21], date: self.dt_txt[21]),
-                WeeklyData(mainn: self.main[22], tempp: self.temp[22], temp_maxx: self.temp_max[22], temp_minn: self.temp_min[22], humidityy: self.humidity[22], descripp: self.descrip[22], date: self.dt_txt[22]),
-                WeeklyData(mainn: self.main[23], tempp: self.temp[23], temp_maxx: self.temp_max[23], temp_minn: self.temp_min[23], humidityy: self.humidity[23], descripp: self.descrip[23], date: self.dt_txt[23]),
-                WeeklyData(mainn: self.main[24], tempp: self.temp[24], temp_maxx: self.temp_max[24], temp_minn: self.temp_min[24], humidityy: self.humidity[24], descripp: self.descrip[24], date: self.dt_txt[24]),
-                WeeklyData(mainn: self.main[25], tempp: self.temp[25], temp_maxx: self.temp_max[25], temp_minn: self.temp_min[25], humidityy: self.humidity[25], descripp: self.descrip[25], date: self.dt_txt[25]),
-                WeeklyData(mainn: self.main[26], tempp: self.temp[26], temp_maxx: self.temp_max[26], temp_minn: self.temp_min[26], humidityy: self.humidity[26], descripp: self.descrip[26], date: self.dt_txt[26]),
-                WeeklyData(mainn: self.main[27], tempp: self.temp[27], temp_maxx: self.temp_max[27], temp_minn: self.temp_min[27], humidityy: self.humidity[27], descripp: self.descrip[27], date: self.dt_txt[27]),
-                WeeklyData(mainn: self.main[28], tempp: self.temp[28], temp_maxx: self.temp_max[28], temp_minn: self.temp_min[28], humidityy: self.humidity[28], descripp: self.descrip[28], date: self.dt_txt[28]),
-                WeeklyData(mainn: self.main[29], tempp: self.temp[29], temp_maxx: self.temp_max[29], temp_minn: self.temp_min[29], humidityy: self.humidity[29], descripp: self.descrip[29], date: self.dt_txt[29]),
-                WeeklyData(mainn: self.main[30], tempp: self.temp[30], temp_maxx: self.temp_max[30], temp_minn: self.temp_min[30], humidityy: self.humidity[30], descripp: self.descrip[30], date: self.dt_txt[30]),
-                WeeklyData(mainn: self.main[31], tempp: self.temp[31], temp_maxx: self.temp_max[31], temp_minn: self.temp_min[31], humidityy: self.humidity[31], descripp: self.descrip[31], date: self.dt_txt[31]),
-                WeeklyData(mainn: self.main[32], tempp: self.temp[32], temp_maxx: self.temp_max[32], temp_minn: self.temp_min[32], humidityy: self.humidity[32], descripp: self.descrip[32], date: self.dt_txt[32]),
-                WeeklyData(mainn: self.main[33], tempp: self.temp[33], temp_maxx: self.temp_max[33], temp_minn: self.temp_min[33], humidityy: self.humidity[33], descripp: self.descrip[33], date: self.dt_txt[33]),
-                WeeklyData(mainn: self.main[34], tempp: self.temp[34], temp_maxx: self.temp_max[34], temp_minn: self.temp_min[34], humidityy: self.humidity[34], descripp: self.descrip[34], date: self.dt_txt[34]),
-                WeeklyData(mainn: self.main[35], tempp: self.temp[35], temp_maxx: self.temp_max[35], temp_minn: self.temp_min[35], humidityy: self.humidity[35], descripp: self.descrip[35], date: self.dt_txt[35]),
-                WeeklyData(mainn: self.main[36], tempp: self.temp[36], temp_maxx: self.temp_max[36], temp_minn: self.temp_min[36], humidityy: self.humidity[36], descripp: self.descrip[36], date: self.dt_txt[36]),
-                WeeklyData(mainn: self.main[37], tempp: self.temp[37], temp_maxx: self.temp_max[37], temp_minn: self.temp_min[37], humidityy: self.humidity[37], descripp: self.descrip[37], date: self.dt_txt[37]),
-                WeeklyData(mainn: self.main[38], tempp: self.temp[38], temp_maxx: self.temp_max[38], temp_minn: self.temp_min[38], humidityy: self.humidity[38], descripp: self.descrip[38], date: self.dt_txt[38]),
-                WeeklyData(mainn: self.main[39], tempp: self.temp[39], temp_maxx: self.temp_max[39], temp_minn: self.temp_min[39], humidityy: self.humidity[39], descripp: self.descrip[39], date: self.dt_txt[39]),
+            for i in 0...39 {
+                self.data.append(WeeklyData(mainn: self.main[i], tempp: self.temp[i], temp_maxx: self.temp_max[i], temp_minn: self.temp_min[i], humidityy: self.humidity[i], descripp: self.descrip[i], date: self.dt_txt[i]))
                 
-            ]
+            }
             
             self.view.addSubview(self.collectionView)
             self.collectionView.backgroundColor = .white

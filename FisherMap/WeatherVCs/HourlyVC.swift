@@ -48,18 +48,6 @@ class HourlyVC: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.reloadData()
-    
-        temp.removeAll()
-        temp_max.removeAll()
-        temp_min.removeAll()
-        feels_like.removeAll()
-        humidity.removeAll()
-        dt_txt.removeAll()
-        visib.removeAll()
-        main.removeAll()
-        descrip.removeAll()
-        first.removeAll()
-        data.removeAll()
         startAnimation()
     }
     
@@ -79,33 +67,10 @@ class HourlyVC: UIViewController{
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
             loading.stopAnimating()
-            self.data = [
-                HourlyData(mainn: self.main[0], tempp: self.temp[0], descripp: self.descrip[0], date: self.dt_txt[0]),
-                HourlyData(mainn: self.main[1], tempp: self.temp[1], descripp: self.descrip[1], date: self.dt_txt[1]),
-                HourlyData(mainn: self.main[2], tempp: self.temp[2], descripp: self.descrip[2], date: self.dt_txt[2]),
-                HourlyData(mainn: self.main[3], tempp: self.temp[3], descripp: self.descrip[3], date: self.dt_txt[3]),
-                HourlyData(mainn: self.main[4], tempp: self.temp[4], descripp: self.descrip[4], date: self.dt_txt[4]),
-                HourlyData(mainn: self.main[5], tempp: self.temp[5], descripp: self.descrip[5], date: self.dt_txt[5]),
-                HourlyData(mainn: self.main[6], tempp: self.temp[6], descripp: self.descrip[6], date: self.dt_txt[6]),
-                HourlyData(mainn: self.main[7], tempp: self.temp[7], descripp: self.descrip[7], date: self.dt_txt[7]),
-                HourlyData(mainn: self.main[8], tempp: self.temp[8], descripp: self.descrip[8], date: self.dt_txt[8]),
-                HourlyData(mainn: self.main[9], tempp: self.temp[9], descripp: self.descrip[9], date: self.dt_txt[9]),
-                HourlyData(mainn: self.main[10], tempp: self.temp[10], descripp: self.descrip[10], date: self.dt_txt[10]),
-               /* HourlyData(mainn: self.main[11], tempp: self.temp[11], descripp: self.descrip[11], date: self.dt_txt[11]),
-                HourlyData(mainn: self.main[12], tempp: self.temp[12], descripp: self.descrip[12], date: self.dt_txt[12]),
-                HourlyData(mainn: self.main[13], tempp: self.temp[13], descripp: self.descrip[13], date: self.dt_txt[13]),
-                HourlyData(mainn: self.main[14], tempp: self.temp[14], descripp: self.descrip[14], date: self.dt_txt[14]),
-                HourlyData(mainn: self.main[15], tempp: self.temp[15], descripp: self.descrip[15], date: self.dt_txt[15]),
-                HourlyData(mainn: self.main[16], tempp: self.temp[16], descripp: self.descrip[16], date: self.dt_txt[16]),
-                HourlyData(mainn: self.main[17], tempp: self.temp[17], descripp: self.descrip[17], date: self.dt_txt[17]),
-                HourlyData(mainn: self.main[18], tempp: self.temp[18], descripp: self.descrip[18], date: self.dt_txt[18]),
-                HourlyData(mainn: self.main[19], tempp: self.temp[19], descripp: self.descrip[19], date: self.dt_txt[19]),
-                HourlyData(mainn: self.main[20], tempp: self.temp[20], descripp: self.descrip[20], date: self.dt_txt[20]),
-                HourlyData(mainn: self.main[21], tempp: self.temp[21], descripp: self.descrip[21], date: self.dt_txt[21]),
-                HourlyData(mainn: self.main[22], tempp: self.temp[22], descripp: self.descrip[22], date: self.dt_txt[22]),
-                HourlyData(mainn: self.main[23], tempp: self.temp[23], descripp: self.descrip[23], date: self.dt_txt[23]),
-                HourlyData(mainn: self.main[24], tempp: self.temp[24], descripp: self.descrip[24], date: self.dt_txt[24]), */
-                  ]
+            for i in 0...13 {
+                self.data.append(HourlyData(mainn: self.main[i], tempp: self.temp[i], descripp: self.descrip[i], date: self.dt_txt[i]))
+            }
+            
             self.view.addSubview(self.collectionView)
             self.collectionView.backgroundColor = .white
             self.collectionView.delegate = self
