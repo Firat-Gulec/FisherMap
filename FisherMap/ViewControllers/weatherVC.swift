@@ -44,6 +44,7 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
         fetchMoon(lat: "\(currentLocation.latitude)", lon: "\(currentLocation.longitude)", date: "\(formatter.string(from: now))", locTime: String(gmtChar.suffix(2)))
     }
     
+    var degree = Double()
     //Ay Durumu çek kardeş
     func fetchMoon(lat: String, lon: String, date: String, locTime: String) {
         guard let url = URL(string: "https://api.solunar.org/solunar/\(lat),\(lon),\(date),\(locTime)")
@@ -58,6 +59,10 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
                 let model = try JSONDecoder().decode(SolunarModel.self,
                                                      from: data)
                 DispatchQueue.main.async {
+                    
+                    
+                    self.degree = Double(.pi * model.sunRiseDec / 180) * 1000
+                    print("\(self.degree)")
                   /*  self.moonImageView.image = UIImage(named: model.moonPhase)
                     self.MoonphsLabel.text = model.moonPhase.wlocalized()
                     self.moonsetLabel.text = model.moonSet
