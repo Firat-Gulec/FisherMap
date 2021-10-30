@@ -18,4 +18,5 @@ struct SolunarModel: Codable {
     let dayRating: Int
     let moonIllumination: Float
     let sunRiseDec: Float
+    let sunTransit: String
 }
