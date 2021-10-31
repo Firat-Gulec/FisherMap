@@ -10,7 +10,6 @@ import CoreLocation
 import NVActivityIndicatorView
 
 
-
 class weatherVC: UIViewController,  CLLocationManagerDelegate {
     
     var currentLocation = CLLocationCoordinate2D()
@@ -20,6 +19,8 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
     var gmtChar = String()
     
     //SubTitle Labels
+    @IBOutlet weak var backImageView: UIImageView!
+    @IBOutlet weak var mainScrollView: UIScrollView!
     @IBOutlet weak var SNLabel: UILabel!
     @IBOutlet weak var NLabel: UILabel!
     @IBOutlet weak var MoonLabel: UILabel!
@@ -40,7 +41,6 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
     @IBOutlet weak var SSSLabel: UILabel!
     @IBOutlet weak var sunImageView: UIImageView!
     
-    
     //Tittle Labels
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var mTypeImage: UIImageView!
@@ -60,12 +60,15 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
     
 
     override func viewWillAppear(_ animated: Bool) {
-        locationLabel.frame = CGRect(x: 25, y: 70, width: view.frame.size.width - 50, height: 35)
-        mTypeImage.frame = CGRect(x: (view.frame.size.width / 2) - 35, y: 105, width: 70, height: 70)
-        moonDescLabel.frame = CGRect(x: 25, y: 180, width: view.frame.size.width - 50, height: 35)
-        moonPhaseLabel.frame = CGRect(x: 25, y: 210, width: view.frame.size.width - 50, height: 35)
+        backImageView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height)
+        mainScrollView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width - 10, height: view.frame.size.height - 10)
+        mainScrollView.contentSize = CGSize(width: view.frame.size.width, height: 900)
+        locationLabel.frame = CGRect(x: 25, y: 10, width: view.frame.size.width - 50, height: 35)
+        mTypeImage.frame = CGRect(x: (view.frame.size.width / 2) - 35, y: 45, width: 70, height: 70)
+        moonDescLabel.frame = CGRect(x: 25, y: 120, width: view.frame.size.width - 50, height: 35)
+        moonPhaseLabel.frame = CGRect(x: 25, y: 150, width: view.frame.size.width - 50, height: 35)
         //MoonView
-        MoonView.frame = CGRect(x: 10, y: 250, width: view.frame.size.width - 20, height: 370)
+        MoonView.frame = CGRect(x: 10, y: 190, width: view.frame.size.width - 20, height: 370)
         MoonLabel.frame = CGRect(x: 10, y: 5, width: MoonView.frame.size.width - 10, height: 35)
         moonImageView.frame = CGRect(x: 40, y: 40, width: MoonView.frame.size.width - 80, height: MoonView.frame.size.height - 80)
         SNLabel.frame = CGRect(x: 10, y: 5, width: MoonView.frame.size.width - 10, height: 15)
@@ -91,7 +94,7 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
         MoonView.layer.cornerRadius = 10
         MoonView.layer.masksToBounds = true
         //SunView
-        SunView.frame = CGRect(x: 10, y: MoonView.frame.size.height + 260, width: view.frame.size.width - 20, height: 200)
+        SunView.frame = CGRect(x: 10, y: MoonView.frame.size.height + 200, width: view.frame.size.width - 20, height: 200)
         SunLabel.frame = CGRect(x: 10, y: 5, width: MoonView.frame.size.width - 10, height: 35)
         sunImageView.frame = CGRect(x: 10, y: 40, width: SunView.frame.size.width - 20, height: SunView.frame.size.height - 80)
         SSRLabel.frame = CGRect(x: 80, y: (SunView.frame.size.height / 2) - 10, width: SunView.frame.size.width - 80, height: 15)
@@ -106,10 +109,8 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
         SunView.layer.masksToBounds = true
         MoonView.isHidden = true
         SunView.isHidden = true
-        
     }
-    
-   
+
     override func viewDidLoad() {
         super.viewDidLoad()
         print(currentLocation)
@@ -118,7 +119,7 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
     }
     
     fileprivate func startAnimation() {
-        let loading = NVActivityIndicatorView(frame: .zero, type: .orbit, color: .black, padding: 0)
+        let loading = NVActivityIndicatorView(frame: .zero, type: .orbit, color: .gray, padding: 0)
         loading.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(loading)
         NSLayoutConstraint.activate([
@@ -127,12 +128,9 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
             loading.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             loading.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
-        //loading.frame = CGRect(x: 10, y: 10, width: 40, height: 40)
         loading.startAnimating()
-        
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
             loading.stopAnimating()
-            
             //tarih çek
             let now = Date()
             print("\(TimeZone.current.abbreviation()!)")
@@ -153,9 +151,7 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
             //burada çalışmak gerek son 2 yerine ilk 3 sonrası almak için! +11 sidney patlak
             self.gmtChar = "\(TimeZone.current.abbreviation()!)"
             self.fetchMoon(lat: "\(self.currentLocation.latitude)", lon: "\(self.currentLocation.longitude)", date: "\(formatter.string(from: now))", locTime: String(self.gmtChar.suffix(2)))
-            
         }
-        
     }
     
     var degree = Double()
@@ -173,8 +169,6 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
                 let model = try JSONDecoder().decode(SolunarModel.self,
                                                      from: data)
                 DispatchQueue.main.async {
-                    
-                    
                     self.degree = Double(.pi * model.sunRiseDec / 180) * 1000
                     print("\(self.degree)")
                     self.mTypeImage.image = UIImage(named: model.moonPhase)
@@ -195,32 +189,22 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
                     self.moonTransitLabel.text = model.sunTransit
                     self.midnightLabel.text = "00:00" //
                     self.ssunsetLabel.text = model.moonSet
-                    
-                    
+    
                     let dayformatter = DateFormatter()
                         dayformatter.dateFormat = "HH:mm"
                     let daydate1 = dayformatter.date(from: model.sunRise)!
                     let daydate2 = dayformatter.date(from: model.sunSet)!
-                        let dayelapsedTime = daydate2.timeIntervalSince(daydate1)
-                        let dayhours = floor(dayelapsedTime / 60 / 60)
-                        let dayminutes = floor((dayelapsedTime - (dayhours * 60 * 60)) / 60)
+                    let dayelapsedTime = daydate2.timeIntervalSince(daydate1)
+                    let dayhours = floor(dayelapsedTime / 60 / 60)
+                    let dayminutes = floor((dayelapsedTime - (dayhours * 60 * 60)) / 60)
                     
-                    self.ssunriseLabel.text = "efs"
+                    self.ssunriseLabel.text = model.moonRise
                     self.suntransitLabel.text = model.moonTransit
                     self.DayLabel.text = "\(Int(dayhours)) hr and \(Int(dayminutes)) min"
                     self.NightLabel.text = "\(24 - Int(dayhours)) hr and \(60 - Int(dayminutes)) min"
                     self.MoonView.isHidden = false
                     self.SunView.isHidden = false
-                    
-                  /*  self.moonImageView.image = UIImage(named: model.moonPhase)
-                    self.MoonphsLabel.text = model.moonPhase.wlocalized()
-                    self.moonsetLabel.text = model.moonSet
-                    self.moonriseLabel.text = model.moonRise
-                    self.moontraLabel.text = model.moonTransit
-                    self.moonunderLabel.text = model.moonUnder
-                    self.moonrateLabel.text = "\(model.dayRating)"
-                    self.moonilluLabel.text = "\(model.moonIllumination)"
-              */  }
+                    }
             }
             catch {
                 print("failed..")

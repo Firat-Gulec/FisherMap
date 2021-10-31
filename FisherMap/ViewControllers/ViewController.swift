@@ -11,12 +11,9 @@ import UIKit
 import CoreLocation
 import SwiftUI
 
-
-
 class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControllerDelegate, MyProtocol {
     
     // MARK: - My protocols func here..
-
     func sendmapType(mapType: MKMapType) {
         mapView.mapType = mapType
         //mapView.reloadInputViews()

@@ -50,7 +50,6 @@ class solunarVC: UIViewController{
         let humidtyVC = children[7]  as? HumidtyVC
         humidtyVC?.humidtyLabel.text = hmd
         humidtyVC?.humidity = humidity
-    
     }
     
     var hmd = String()
@@ -74,8 +73,6 @@ class solunarVC: UIViewController{
     var descrip: [String] = []
     var first = [String]()
     
- 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         print(currentLocation)
@@ -90,12 +87,8 @@ class solunarVC: UIViewController{
          main.removeAll()
          descrip.removeAll()
          first = ["John", "Paul"]
-        
-        //print(main[0])
-        
     }
 
-   
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "humidity" {
             let humidtyVC = segue.destination as? HumidtyVC
@@ -143,8 +136,7 @@ class solunarVC: UIViewController{
                     self.visibility = "%\(model.visibility)"
                     //Send to ConteinerViews Data
                     self.sendDataVCs()
-                    
-                    
+                
                 }
             }
             catch {
@@ -154,7 +146,6 @@ class solunarVC: UIViewController{
         task.resume()
     }
 
-    
     //Hava Durumu çek kardeş
     func fetchWeatherForecast(lat: String, lon: String, units: String, lang: String, apikey: String) {
       /*  let fdata: Data? = """
@@ -233,35 +224,17 @@ class solunarVC: UIViewController{
                        }
                    }
                    task.resume()
-                                   
-                               
-              /*  }
-            }
-            catch {
-                print("failed..")
-            }
-        }
-        task.resume()*/
     }
-    
-    
+  
     override func viewWillAppear(_ animated: Bool) {
-       
-        
-        
         backImageView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height)
         mainScrollView.frame = CGRect(x: 10, y: 10, width: view.frame.size.width - 20, height: view.frame.size.height - 20)
         mainScrollView.contentSize = CGSize(width: view.frame.size.width, height: 1000)
-        
-        
         wfLocationLabel.frame = CGRect(x: 20, y: 0, width: view.frame.size.width - 50, height: 35)
         wfImageView.frame = CGRect(x: 20, y: 35, width: view.frame.size.width - 60, height: 60)
         wfTempLabel.frame = CGRect(x: 20, y: 90, width: view.frame.size.width - 50, height: 60)
         wfDescLabel.frame = CGRect(x: 20, y: 130, width: view.frame.size.width - 50, height: 35)
         wftempHLLabel.frame = CGRect(x: 20, y: 150, width: view.frame.size.width - 50, height: 35)
-        
-        
-        
         hourlyCView.frame = CGRect(x: 10, y: 200, width: view.frame.size.width - 30, height: 100)
         weeklyCView.frame = CGRect(x: 10, y: 315, width: view.frame.size.width - 30, height: 200)
         cloudsCView.frame = CGRect(x: 10, y: 530, width: (view.frame.size.width / 2) - 20, height: 120)
@@ -303,16 +276,6 @@ class solunarVC: UIViewController{
         humidityCView.layer.cornerRadius = 10
         humidityCView.layer.masksToBounds = true
         
-        
-        /*
-        button.layer.shadowRadius = 10
-        button.layer.shadowOpacity = 0.3
-        //button.layer.masksToBounds = true
-        button.layer.cornerRadius = 20
-        
-        */
-       
-        
          //tarih çek
          let now = Date()
          print("\(TimeZone.current.abbreviation()!)")
@@ -335,26 +298,7 @@ class solunarVC: UIViewController{
          
          //Data cek
          fetchWeather(lat: "\(currentLocation.latitude)", lon: "\(currentLocation.longitude)", units: metricSys, lang: langChar, apikey: "")
-        
-         // Do any additional setup after loading the view.
-        
-        
-        
     }
 
-    
-    
-    
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
