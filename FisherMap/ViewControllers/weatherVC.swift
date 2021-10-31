@@ -26,6 +26,8 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
     @IBOutlet weak var MoonLabel: UILabel!
     @IBOutlet weak var MoonView: UIView!
     @IBOutlet weak var moonImageView: UIImageView!
+    
+    @IBOutlet weak var moonDatePicker: UIDatePicker!
     @IBOutlet weak var MDLabel: UILabel!
     @IBOutlet weak var TWRLabel: UILabel!
     @IBOutlet weak var TWLLabel: UILabel!
@@ -58,15 +60,43 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
     @IBOutlet weak var suntransitLabel: UILabel!
     @IBOutlet weak var ssunsetLabel: UILabel!
     
+    
+    @IBAction func moonDatePicker(_ sender: Any) {
+        //regional kısaltması
+        langChar = Locale.current.identifier
+        let langIndex = langChar.index(langChar.startIndex, offsetBy: 2)
+        langChar = String(langChar[..<langIndex])    // "My
+        //Metrik bilgisi
+        if (Locale.current.usesMetricSystem == true) {
+            self.metricSys = "imperial"
+        }else {
+            self.metricSys = "metric"
+        }
+        //burada çalışmak gerek son 2 yerine ilk 3 sonrası almak için! +11 sidney patlak
+        gmtChar = "\(TimeZone.current.abbreviation()!)"
+        //tarih çek
+        let now = moonDatePicker.date
+        print("\(TimeZone.current.abbreviation()!)")
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone.current
+        formatter.dateFormat = "yyyyMMdd"
+        
+        print("\(moonDatePicker.date)")
+        fetchMoon(lat: "\(currentLocation.latitude)", lon: "\(currentLocation.longitude)", date: "\(formatter.string(from: now))", locTime: String(gmtChar.suffix(2)))
+        
+        
+    }
+    
 
     override func viewWillAppear(_ animated: Bool) {
         backImageView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height)
         mainScrollView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width - 10, height: view.frame.size.height - 10)
         mainScrollView.contentSize = CGSize(width: view.frame.size.width, height: 900)
-        locationLabel.frame = CGRect(x: 25, y: 10, width: view.frame.size.width - 50, height: 35)
+        locationLabel.frame = CGRect(x: 25, y: 0, width: view.frame.size.width - 50, height: 35)
         mTypeImage.frame = CGRect(x: (view.frame.size.width / 2) - 35, y: 45, width: 70, height: 70)
         moonDescLabel.frame = CGRect(x: 25, y: 120, width: view.frame.size.width - 50, height: 35)
         moonPhaseLabel.frame = CGRect(x: 25, y: 150, width: view.frame.size.width - 50, height: 35)
+        moonDatePicker.frame = CGRect(x: 25, y: 0, width: view.frame.size.width - 50, height: 35)
         //MoonView
         MoonView.frame = CGRect(x: 10, y: 190, width: view.frame.size.width - 20, height: 370)
         MoonLabel.frame = CGRect(x: 10, y: 5, width: MoonView.frame.size.width - 10, height: 35)
