@@ -647,8 +647,8 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
             performSegue(withIdentifier: "buying", sender: nil)
         case .locations:
             performSegue(withIdentifier: "locations", sender: nil)
-        case .catches:
-            performSegue(withIdentifier: "catches", sender: nil)
+        case .fishing:
+            performSegue(withIdentifier: "fishing", sender: nil)
         case .weather:
             performSegue(withIdentifier: "weather", sender: nil)
         case .solunar:

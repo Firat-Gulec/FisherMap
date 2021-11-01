@@ -16,7 +16,7 @@ enum SideMenuItem: String, CaseIterable {
     case buying = "Start 7- Day Free Trial"
     case map = "Map"
     case locations = "Locations"
-    case catches = "Catches"
+    case fishing = "Fishing"
     case weather = "Solunar"
     case solunar = "Weather"
     case settings = "Settings"

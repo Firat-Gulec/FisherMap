@@ -148,10 +148,6 @@ class solunarVC: UIViewController{
 
     //Hava Durumu çek kardeş
     func fetchWeatherForecast(lat: String, lon: String, units: String, lang: String, apikey: String) {
-      /*  let fdata: Data? = """
-        {"coord":{"lon":-80,"lat":40.44},"weather":[{"id":804,"main":"Clouds","description":"overcast clouds","icon":"04d"}],"base":"stations","main":{"temp":41.5,"feels_like":36.81,"temp_min":37.4,"temp_max":45,"pressure":1021,"humidity":80},"visibility":16093,"wind":{"speed":3.04,"deg":79},"clouds":{"all":90},"dt":1585068301,"sys":{"type":1,"id":3510,"country":"US","sunrise":1585048554,"sunset":1585092969},"timezone":-14400,"id":5206379,"name":"Pittsburgh","cod":200}
-        """.data(using: .utf8)
-        */
         guard let url = URL(string:  "http://api.openweathermap.org/data/2.5/forecast?lat=\(lat)&lon=\(lon)&units=\(units)&lang=\(lang)&appid=9e934037e50bdf637b1d64f942b8e944") else {
                    
         print("Invalid URL")
@@ -288,7 +284,7 @@ class solunarVC: UIViewController{
          let langIndex = langChar.index(langChar.startIndex, offsetBy: 2)
          langChar = String(langChar[..<langIndex])    // "My
          //Metrik bilgisi
-         if (Locale.current.usesMetricSystem == true) {
+         if (Locale.current.usesMetricSystem == false) {
              metricSys = "imperial"
          }else {
              metricSys = "metric"

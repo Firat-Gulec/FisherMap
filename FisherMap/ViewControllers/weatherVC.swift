@@ -67,7 +67,7 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
         let langIndex = langChar.index(langChar.startIndex, offsetBy: 2)
         langChar = String(langChar[..<langIndex])    // "My
         //Metrik bilgisi
-        if (Locale.current.usesMetricSystem == true) {
+        if (Locale.current.usesMetricSystem == false) {
             self.metricSys = "imperial"
         }else {
             self.metricSys = "metric"
@@ -80,14 +80,9 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
         let formatter = DateFormatter()
         formatter.timeZone = TimeZone.current
         formatter.dateFormat = "yyyyMMdd"
-        
-        print("\(moonDatePicker.date)")
         fetchMoon(lat: "\(currentLocation.latitude)", lon: "\(currentLocation.longitude)", date: "\(formatter.string(from: now))", locTime: String(gmtChar.suffix(2)))
-        
-        
     }
     
-
     override func viewWillAppear(_ animated: Bool) {
         backImageView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height)
         mainScrollView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width - 10, height: view.frame.size.height - 10)
