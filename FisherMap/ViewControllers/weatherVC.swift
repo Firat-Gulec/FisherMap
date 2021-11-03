@@ -17,6 +17,9 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
     var langChar = String()
     var metricSys = String()
     var gmtChar = String()
+    var hourlySymbols:[String] = []
+    var hourlyValues:[Int] = []
+    var degree = Double()
     
     //SubTitle Labels
     @IBOutlet weak var backImageView: UIImageView!
@@ -179,7 +182,7 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
         }
     }
     
-    var degree = Double()
+    
     //Ay Durumu çek kardeş
     func fetchMoon(lat: String, lon: String, date: String, locTime: String) {
         guard let url = URL(string: "https://api.solunar.org/solunar/\(lat),\(lon),\(date),\(locTime)")
@@ -222,6 +225,11 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
                     let dayelapsedTime = daydate2.timeIntervalSince(daydate1)
                     let dayhours = floor(dayelapsedTime / 60 / 60)
                     let dayminutes = floor((dayelapsedTime - (dayhours * 60 * 60)) / 60)
+                    
+                    for (key, value) in model.hourlyRating {
+                        self.hourlySymbols.append(key)
+                        self.hourlyValues.append(value)
+                               }
                     
                     self.ssunriseLabel.text = model.moonRise
                     self.suntransitLabel.text = model.moonTransit
