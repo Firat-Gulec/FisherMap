@@ -199,19 +199,19 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
                 DispatchQueue.main.async {
                     self.degree = Double(.pi * model.sunRiseDec / 180) * 1000
                     print("\(self.degree)")
-                    self.mTypeImage.image = UIImage(named: model.moonPhase)
-                    self.moonDescLabel.text = model.moonPhase.wlocalized()
+                    self.mTypeImage.image = UIImage(named: model.moonPhase ?? "test")
+                    self.moonDescLabel.text = model.moonPhase?.wlocalized()
                     self.moonPhaseLabel.text = "\(Int(model.moonIllumination * 100))%"
                     self.sunSetLabel.text = model.sunSet
                     let dtimeFormat = DateFormatter()
                     dtimeFormat.dateFormat = "HH:mm"
-                    let dusk = dtimeFormat.date(from: model.sunSet)
+                    let dusk = dtimeFormat.date(from: model.sunSet ?? "test")
                     let mdusk = dusk?.addingTimeInterval(TimeInterval(30.0 * 60.0))
                     self.DuskLabel.text = dtimeFormat.string(from: mdusk!)
                     let timeFormat = DateFormatter()
                     timeFormat.dateFormat = "hh:mm"
                     self.sunRiseLabel.text = model.sunRise
-                    let dawn = timeFormat.date(from: model.sunRise)
+                    let dawn = timeFormat.date(from: model.sunRise ?? "test")
                     let mdawn = dawn?.addingTimeInterval(TimeInterval(-30.0 * 60.0))
                     self.DawnLabel.text = timeFormat.string(from: mdawn!)
                     self.moonTransitLabel.text = model.sunTransit
@@ -220,8 +220,8 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
     
                     let dayformatter = DateFormatter()
                         dayformatter.dateFormat = "HH:mm"
-                    let daydate1 = dayformatter.date(from: model.sunRise)!
-                    let daydate2 = dayformatter.date(from: model.sunSet)!
+                    let daydate1 = dayformatter.date(from: model.sunRise ?? "test")!
+                    let daydate2 = dayformatter.date(from: model.sunSet ?? "test")!
                     let dayelapsedTime = daydate2.timeIntervalSince(daydate1)
                     let dayhours = floor(dayelapsedTime / 60 / 60)
                     let dayminutes = floor((dayelapsedTime - (dayhours * 60 * 60)) / 60)

@@ -7,5 +7,6 @@ target 'FisherMap' do
 
 pod 'SideMenu'
 pod 'NVActivityIndicatorView'
+pod 'Charts'
 
 end

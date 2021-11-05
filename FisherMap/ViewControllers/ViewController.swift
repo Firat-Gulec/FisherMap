@@ -298,6 +298,10 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
             let destinationVC = segue.destination as! solunarVC
             destinationVC.currentLocation = weatherLocation
         }
+        if segue.identifier == "fishing" {
+            let destinationVC = segue.destination as! fishingVC
+            destinationVC.currentLocation = weatherLocation
+        }
        
     }
     
