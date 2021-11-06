@@ -22,7 +22,7 @@ class fishingVC: UIViewController, ChartViewDelegate {
     var degree = Double()
     
     //Chart Testing..
-    var barChart = BarChartView()
+    var lineChart = LineChartView()
     
     
     
@@ -43,7 +43,7 @@ class fishingVC: UIViewController, ChartViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         print(currentLocation)
-        barChart.delegate = self
+        lineChart.delegate = self
         self.startAnimation()
         
         // Do any additional setup after loading the view.
@@ -65,7 +65,7 @@ class fishingVC: UIViewController, ChartViewDelegate {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
             loading.stopAnimating()
             //tarih çek
-            let now = Date()
+            let now = self.dayDatePicker.date
             print("\(TimeZone.current.abbreviation()!)")
             let formatter = DateFormatter()
             formatter.timeZone = TimeZone.current
@@ -99,35 +99,18 @@ class fishingVC: UIViewController, ChartViewDelegate {
         fishingTimeView.frame = CGRect(x: 10, y: fishGraphicView.frame.size.height + 200, width: view.frame.size.width - 20, height: 200)
         fishGraphicView.isHidden = true
         fishingTimeView.isHidden = true
+        lineChart.frame = CGRect(x: 0, y: 0, width: fishGraphicView.frame.width, height: fishGraphicView.frame.height)
         
+       // self.lineChart.center = self.fishGraphicView.center
+        fishGraphicView.addSubview(lineChart)
         
         
     }
 
     
     @IBAction func dayChange(_ sender: Any) {
-        barChart.clear()
-        
-        //regional kısaltması
-        langChar = Locale.current.identifier
-        let langIndex = langChar.index(langChar.startIndex, offsetBy: 2)
-        langChar = String(langChar[..<langIndex])    // "My
-        //Metrik bilgisi
-        if (Locale.current.usesMetricSystem == false) {
-            self.metricSys = "imperial"
-        }else {
-            self.metricSys = "metric"
-        }
-        //burada çalışmak gerek son 2 yerine ilk 3 sonrası almak için! +11 sidney patlak
-        gmtChar = "\(TimeZone.current.abbreviation()!)"
-        //tarih çek
-        let now = dayDatePicker.date
-        print("\(TimeZone.current.abbreviation()!)")
-        let formatter = DateFormatter()
-        formatter.timeZone = TimeZone.current
-        formatter.dateFormat = "yyyyMMdd"
-        fetchMoon(lat: "\(currentLocation.latitude)", lon: "\(currentLocation.longitude)", date: "\(formatter.string(from: now))", locTime: String(gmtChar.suffix(2)))
-        
+       
+        startAnimation()
     }
     
     
@@ -145,29 +128,52 @@ class fishingVC: UIViewController, ChartViewDelegate {
                 let model = try JSONDecoder().decode(SolunarModel.self,
                                                      from: data)
                 DispatchQueue.main.async {
-                    self.barChart.frame = CGRect(x: 0, y: 0, width: self.fishGraphicView.frame.width, height: self.fishGraphicView.frame.height)
-                    self.barChart.center = self.fishGraphicView.center
-                    self.fishGraphicView.addSubview(self.barChart)
-                    var entries = [BarChartDataEntry]()
+                   
+                    
+                   
+                    var entries: [ChartDataEntry] = []
                     for (key, value) in model.hourlyRating.sorted(by: <) {
                         //entries.append(BarChartDataEntry(x: Double(Int(key)!), y: Double(value)))
                         self.hourlySymbols.append(key)
                         self.hourlyValues.append(value)
                                }
                     let symbolssorted = self.hourlySymbols.enumerated().sorted(by: {$0.element < $1.element})
-                    
                     let sybolson = symbolssorted.map{$0.offset}
                     
-                    
                     print("\(self.hourlyValues)")
-                    for x in 0..<24 {
-                        entries.append(BarChartDataEntry(x: Double(sybolson[x]), y: Double(self.hourlyValues[sybolson[x]])))
+                   
+                    for x in sybolson {
+                        entries.append(ChartDataEntry(x: Double(sybolson[x]), y: Double(self.hourlyValues[sybolson[x]])))
                     }
-                    let set = BarChartDataSet(entries: entries)
-                    set.colors = ChartColorTemplates.joyful()
-                    let data = BarChartData(dataSet: set)
-                    self.barChart.data = data
                     
+                    let set = LineChartDataSet(entries: entries, label: "Hourly Data")
+                    //set.colors = ChartColorTemplates.material()
+                    set.drawCirclesEnabled = false
+                    set.mode = .cubicBezier
+                    set.lineWidth = 2
+                    set.setColor(.gray)
+                    set.fill = Fill(color: .darkGray)
+                    set.fillAlpha = 0.8
+                    set.drawFilledEnabled = true
+                    let data = LineChartData(dataSet: set)
+                    data.setDrawValues(false)
+                    self.lineChart.data = data
+                    self.lineChart.rightAxis.enabled = false
+                    self.lineChart.leftAxis.labelPosition = .outsideChart
+                    self.lineChart.leftAxis.labelFont = .boldSystemFont(ofSize: 12)
+                    self.lineChart.leftAxis.setLabelCount(6, force: false)
+                    self.lineChart.leftAxis.labelTextColor = .black
+                    self.lineChart.leftAxis.axisLineColor = .systemBlue
+                  
+                    self.lineChart.xAxis.enabled = true
+                    self.lineChart.xAxis.labelPosition = .bottom
+                    self.lineChart.xAxis.labelFont = .boldSystemFont(ofSize: 12)
+                    self.lineChart.xAxis.setLabelCount(6, force: false)
+                    self.lineChart.xAxis.labelTextColor = .black
+                    self.lineChart.xAxis.axisLineColor = .systemBlue
+                    //self.lineChart.animate(xAxisDuration: 2.2)
+                    self.lineChart.data?.notifyDataChanged()
+                    self.lineChart.notifyDataSetChanged()
                     self.fishGraphicView.isHidden = false
                     self.fishingTimeView.isHidden = false
                     }
