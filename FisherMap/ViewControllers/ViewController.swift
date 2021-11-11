@@ -659,8 +659,8 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
             performSegue(withIdentifier: "solunar", sender: nil)
         case .settings:
             performSegue(withIdentifier: "settings", sender: nil)
-        case .help:
-            performSegue(withIdentifier: "help", sender: nil)
+        case .about:
+            performSegue(withIdentifier: "about", sender: nil)
         }
     }
 }

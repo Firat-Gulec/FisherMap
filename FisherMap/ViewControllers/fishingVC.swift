@@ -95,13 +95,13 @@ class fishingVC: UIViewController, ChartViewDelegate {
         dayRateImage.frame = CGRect(x: (view.frame.size.width / 2) - 35, y: 45, width: 70, height: 70)
         dayDiscLabel.frame = CGRect(x: 25, y: 120, width: view.frame.size.width - 50, height: 35)
         dayDatePicker.frame = CGRect(x: 25, y: 0, width: view.frame.size.width - 50, height: 35)
-        fishGraphicView.frame = CGRect(x: 10, y: 190, width: view.frame.size.width - 20, height: 370)
+        fishGraphicView.frame = CGRect(x: 10, y: 190, width: view.frame.size.width - 20, height: view.frame.size.height / 3)
         fishingTimeView.frame = CGRect(x: 10, y: fishGraphicView.frame.size.height + 200, width: view.frame.size.width - 20, height: 200)
         fishGraphicView.isHidden = true
         fishingTimeView.isHidden = true
         lineChart.frame = CGRect(x: 0, y: 0, width: fishGraphicView.frame.width, height: fishGraphicView.frame.height)
         
-       // self.lineChart.center = self.fishGraphicView.center
+        //self.lineChart.center = self.fishGraphicView.center
         fishGraphicView.addSubview(lineChart)
         
         
@@ -109,7 +109,13 @@ class fishingVC: UIViewController, ChartViewDelegate {
 
     
     @IBAction func dayChange(_ sender: Any) {
-       
+        fishGraphicView.isHidden = true
+        fishingTimeView.isHidden = true
+        lineChart.removeFromSuperview()
+        lineChart.lineData?.clearValues()
+        lineChart.clearAllViewportJobs()
+        lineChart.frame = CGRect(x: 0, y: 0, width: fishGraphicView.frame.width, height: fishGraphicView.frame.height)
+        fishGraphicView.addSubview(lineChart)
         startAnimation()
     }
     
@@ -120,16 +126,17 @@ class fishingVC: UIViewController, ChartViewDelegate {
         else {
             return
         }
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data, error == nil else {
+        let task = URLSession.shared.dataTask(with: url) { edata, response, error in
+            guard let edata = edata, error == nil else {
               return
             }
             do {
                 let model = try JSONDecoder().decode(SolunarModel.self,
-                                                     from: data)
+                                                     from: edata)
                 DispatchQueue.main.async {
                    
-                    
+                    self.hourlyValues.removeAll()
+                    self.hourlySymbols.removeAll()
                    
                     var entries: [ChartDataEntry] = []
                     for (key, value) in model.hourlyRating.sorted(by: <) {
@@ -141,13 +148,29 @@ class fishingVC: UIViewController, ChartViewDelegate {
                     let sybolson = symbolssorted.map{$0.offset}
                     
                     print("\(self.hourlyValues)")
-                   
-                    for x in sybolson {
-                        entries.append(ChartDataEntry(x: Double(sybolson[x]), y: Double(self.hourlyValues[sybolson[x]])))
-                    }
+                    entries.removeAll()
                     
+                    self.lineChart.rightAxis.enabled = false
+                    self.lineChart.leftAxis.labelPosition = .outsideChart
+                    self.lineChart.leftAxis.labelFont = .boldSystemFont(ofSize: 12)
+                    self.lineChart.leftAxis.setLabelCount(6, force: false)
+                    //self.lineChart.leftAxis.labelTextColor = .black
+                    self.lineChart.leftAxis.axisLineColor = .systemBlue
+                  
+                    self.lineChart.xAxis.enabled = true
+                    self.lineChart.xAxis.labelPosition = .bottom
+                    self.lineChart.xAxis.labelFont = .boldSystemFont(ofSize: 12)
+                    self.lineChart.xAxis.setLabelCount(6, force: false)
+                    //self.lineChart.xAxis.labelTextColor = .black
+                    self.lineChart.xAxis.axisLineColor = .systemBlue
+                    
+                    for sort in sybolson {
+                        entries.append(ChartDataEntry(x: Double(sybolson[sort]), y: Double(self.hourlyValues[sybolson[sort]])))
+                    }
+                   
                     let set = LineChartDataSet(entries: entries, label: "Hourly Data")
                     //set.colors = ChartColorTemplates.material()
+                    
                     set.drawCirclesEnabled = false
                     set.mode = .cubicBezier
                     set.lineWidth = 2
@@ -155,25 +178,19 @@ class fishingVC: UIViewController, ChartViewDelegate {
                     set.fill = Fill(color: .darkGray)
                     set.fillAlpha = 0.8
                     set.drawFilledEnabled = true
-                    let data = LineChartData(dataSet: set)
-                    data.setDrawValues(false)
-                    self.lineChart.data = data
-                    self.lineChart.rightAxis.enabled = false
-                    self.lineChart.leftAxis.labelPosition = .outsideChart
-                    self.lineChart.leftAxis.labelFont = .boldSystemFont(ofSize: 12)
-                    self.lineChart.leftAxis.setLabelCount(6, force: false)
-                    self.lineChart.leftAxis.labelTextColor = .black
-                    self.lineChart.leftAxis.axisLineColor = .systemBlue
-                  
-                    self.lineChart.xAxis.enabled = true
-                    self.lineChart.xAxis.labelPosition = .bottom
-                    self.lineChart.xAxis.labelFont = .boldSystemFont(ofSize: 12)
-                    self.lineChart.xAxis.setLabelCount(6, force: false)
-                    self.lineChart.xAxis.labelTextColor = .black
-                    self.lineChart.xAxis.axisLineColor = .systemBlue
-                    //self.lineChart.animate(xAxisDuration: 2.2)
+                    self.lineChart.data?.clearValues()
                     self.lineChart.data?.notifyDataChanged()
                     self.lineChart.notifyDataSetChanged()
+                    self.lineChart.clearValues()
+                   // self.lineChart.BarLineScatterCandleBubbleRenderer.
+                    
+                    let linedata = LineChartData(dataSet: set)
+                    linedata.setDrawValues(false)
+                    
+                    self.lineChart.data = linedata
+                    print("burda test")
+                    self.lineChart.animate(xAxisDuration: 2.0)
+                    
                     self.fishGraphicView.isHidden = false
                     self.fishingTimeView.isHidden = false
                     }

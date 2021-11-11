@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Suz-Q9-fig">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Suz-Q9-fig">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -53,7 +53,7 @@
                     <connections>
                         <outlet property="mapView" destination="kr5-gk-rQh" id="PzK-og-kyA"/>
                         <segue destination="zZZ-Kh-kDE" kind="show" identifier="weather" id="2bf-57-XvU"/>
-                        <segue destination="9Wz-BO-BlF" kind="show" identifier="help" id="che-AE-di0"/>
+                        <segue destination="9Wz-BO-BlF" kind="show" identifier="about" id="che-AE-di0"/>
                         <segue destination="7o0-Ye-Wsb" kind="show" identifier="settings" id="fxJ-as-DqG"/>
                         <segue destination="7bj-ID-VpT" kind="show" identifier="solunar" id="vJs-bq-Ktg"/>
                         <segue destination="e29-RD-oGb" kind="show" identifier="fishing" id="u74-0X-q1g"/>
@@ -473,21 +473,30 @@
             </objects>
             <point key="canvasLocation" x="3635" y="865"/>
         </scene>
-        <!--HelpVC-->
+        <!--AboutVC-->
         <scene sceneID="C6k-Nd-DHo">
             <objects>
-                <viewController storyboardIdentifier="helpVC" id="9Wz-BO-BlF" customClass="helpVC" customModule="FisherMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="helpVC" id="9Wz-BO-BlF" customClass="aboutVC" customModule="FisherMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E2r-HS-Nfp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kZf-tL-gAw">
+                                <rect key="frame" x="0.0" y="0.0" width="428" height="896"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="pFa-vv-Ro7"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="Prm-fx-Rlg"/>
+                    <connections>
+                        <outlet property="backImageView" destination="kZf-tL-gAw" id="p7q-y1-ftS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0tP-5B-tmI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5241" y="689"/>
+            <point key="canvasLocation" x="5240.579710144928" y="688.39285714285711"/>
         </scene>
         <!--SolunarVC-->
         <scene sceneID="6Ty-x9-kF0">

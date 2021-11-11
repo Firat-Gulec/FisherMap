@@ -20,7 +20,7 @@ enum SideMenuItem: String, CaseIterable {
     case weather = "Solunar"
     case solunar = "Weather"
     case settings = "Settings"
-    case help = "Help"
+    case about = "About"
 }
 
 class MenuController: UITableViewController {
