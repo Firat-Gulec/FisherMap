@@ -11,7 +11,6 @@ import CoreLocation
 
 class solunarVC: UIViewController{
     
-    
     var currentLocation = CLLocationCoordinate2D()
 
     @IBOutlet weak var backImageView: UIImageView!
@@ -24,7 +23,6 @@ class solunarVC: UIViewController{
     @IBOutlet weak var sunriseCView: UIView!
     @IBOutlet weak var eyeshotCView: UIView!
     @IBOutlet weak var humidityCView: UIView!
-    
     @IBOutlet weak var wfLocationLabel: UILabel!
     @IBOutlet weak var wfTempLabel: UILabel!
     @IBOutlet weak var wfImageView: UIImageView!
@@ -60,7 +58,6 @@ class solunarVC: UIViewController{
     var sunset = String()
     var clouds = String()
     var visibility = String()
-    
     //var list: [List] = []
     var temp: [String] = []
     var temp_max: [String] = []
@@ -136,7 +133,6 @@ class solunarVC: UIViewController{
                     self.visibility = "%\(model.visibility)"
                     //Send to ConteinerViews Data
                     self.sendDataVCs()
-                
                 }
             }
             catch {

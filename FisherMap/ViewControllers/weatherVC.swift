@@ -217,7 +217,7 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
                     self.moonTransitLabel.text = model.sunTransit
                     self.midnightLabel.text = "00:00" //
                     self.ssunsetLabel.text = model.moonSet
-    
+
                     let dayformatter = DateFormatter()
                         dayformatter.dateFormat = "HH:mm"
                     let daydate1 = dayformatter.date(from: model.sunRise ?? "test")!

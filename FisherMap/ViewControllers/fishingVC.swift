@@ -10,6 +10,7 @@ import NVActivityIndicatorView
 import CoreLocation
 import Charts
 
+
 class fishingVC: UIViewController, ChartViewDelegate {
 
     var currentLocation = CLLocationCoordinate2D()
@@ -24,12 +25,6 @@ class fishingVC: UIViewController, ChartViewDelegate {
     //Chart Testing..
     var lineChart = LineChartView()
     
-    
-    
-    
-    
-    
-    
     @IBOutlet weak var backImage: UIImageView!
     @IBOutlet weak var fishingscrollView: UIScrollView!
     @IBOutlet weak var fishingLocLabel: UILabel!
@@ -39,7 +34,6 @@ class fishingVC: UIViewController, ChartViewDelegate {
     @IBOutlet weak var fishGraphicView: UIView!
     @IBOutlet weak var fishingTimeView: UIView!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         print(currentLocation)
@@ -48,8 +42,6 @@ class fishingVC: UIViewController, ChartViewDelegate {
         
         // Do any additional setup after loading the view.
     }
-    
-    
     
     fileprivate func startAnimation() {
         let loading = NVActivityIndicatorView(frame: .zero, type: .orbit, color: .gray, padding: 0)
@@ -100,13 +92,9 @@ class fishingVC: UIViewController, ChartViewDelegate {
         fishGraphicView.isHidden = true
         fishingTimeView.isHidden = true
         lineChart.frame = CGRect(x: 0, y: 0, width: fishGraphicView.frame.width, height: fishGraphicView.frame.height)
-        
         //self.lineChart.center = self.fishGraphicView.center
         fishGraphicView.addSubview(lineChart)
-        
-        
     }
-
     
     @IBAction func dayChange(_ sender: Any) {
         fishGraphicView.isHidden = true
@@ -118,7 +106,6 @@ class fishingVC: UIViewController, ChartViewDelegate {
         fishGraphicView.addSubview(lineChart)
         startAnimation()
     }
-    
     
     //Ay Durumu çek kardeş
     func fetchMoon(lat: String, lon: String, date: String, locTime: String) {
@@ -134,10 +121,8 @@ class fishingVC: UIViewController, ChartViewDelegate {
                 let model = try JSONDecoder().decode(SolunarModel.self,
                                                      from: edata)
                 DispatchQueue.main.async {
-                   
                     self.hourlyValues.removeAll()
                     self.hourlySymbols.removeAll()
-                   
                     var entries: [ChartDataEntry] = []
                     for (key, value) in model.hourlyRating.sorted(by: <) {
                         //entries.append(BarChartDataEntry(x: Double(Int(key)!), y: Double(value)))
@@ -146,31 +131,25 @@ class fishingVC: UIViewController, ChartViewDelegate {
                                }
                     let symbolssorted = self.hourlySymbols.enumerated().sorted(by: {$0.element < $1.element})
                     let sybolson = symbolssorted.map{$0.offset}
-                    
-                    print("\(self.hourlyValues)")
+                    //print("\(self.hourlyValues)")
                     entries.removeAll()
-                    
                     self.lineChart.rightAxis.enabled = false
                     self.lineChart.leftAxis.labelPosition = .outsideChart
                     self.lineChart.leftAxis.labelFont = .boldSystemFont(ofSize: 12)
                     self.lineChart.leftAxis.setLabelCount(6, force: false)
                     //self.lineChart.leftAxis.labelTextColor = .black
                     self.lineChart.leftAxis.axisLineColor = .systemBlue
-                  
                     self.lineChart.xAxis.enabled = true
                     self.lineChart.xAxis.labelPosition = .bottom
                     self.lineChart.xAxis.labelFont = .boldSystemFont(ofSize: 12)
                     self.lineChart.xAxis.setLabelCount(6, force: false)
                     //self.lineChart.xAxis.labelTextColor = .black
                     self.lineChart.xAxis.axisLineColor = .systemBlue
-                    
                     for sort in sybolson {
                         entries.append(ChartDataEntry(x: Double(sybolson[sort]), y: Double(self.hourlyValues[sybolson[sort]])))
                     }
-                   
                     let set = LineChartDataSet(entries: entries, label: "Hourly Data")
                     //set.colors = ChartColorTemplates.material()
-                    
                     set.drawCirclesEnabled = false
                     set.mode = .cubicBezier
                     set.lineWidth = 2
@@ -183,14 +162,11 @@ class fishingVC: UIViewController, ChartViewDelegate {
                     self.lineChart.notifyDataSetChanged()
                     self.lineChart.clearValues()
                    // self.lineChart.BarLineScatterCandleBubbleRenderer.
-                    
                     let linedata = LineChartData(dataSet: set)
                     linedata.setDrawValues(false)
-                    
                     self.lineChart.data = linedata
                     print("burda test")
                     self.lineChart.animate(xAxisDuration: 2.0)
-                    
                     self.fishGraphicView.isHidden = false
                     self.fishingTimeView.isHidden = false
                     }

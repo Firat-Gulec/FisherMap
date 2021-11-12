@@ -7,6 +7,7 @@
 
 import UIKit
 import NVActivityIndicatorView
+import StoreKit
 
 struct AboutData {
     var title: String
@@ -76,8 +77,6 @@ class aboutVC: UIViewController {
     }
 }
 
-
-
 // MARK: - Collection View properties
 
 
@@ -88,7 +87,6 @@ extension aboutVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return data.count
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! AboutCell
@@ -101,11 +99,22 @@ extension aboutVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSourc
         //Write actions
         let selection = data[indexPath.row].url
         if selection == "rateapp" {
-            
-        }else if selection == "sendapp" {
-            
+            //Rate APP
+            guard let writeReviewURL = URL(string: "https://apps.apple.com/app/id1586186748?action=write-review")
+                else { fatalError("Expected a valid URL") }
+            UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
         }else if selection == "shareapp" {
-            
+            //Share APP
+            let postText: String = "You should install this app!"
+            let postURL = URL(string: "https://apps.apple.com/app/id1586186748?action=write-review")!
+            let activityItems = [postText, postURL] as [Any]
+            let activityController = UIActivityViewController(
+                activityItems: activityItems,
+                applicationActivities: nil)
+            activityController.popoverPresentationController?.sourceView = self.view
+            activityController.popoverPresentationController?.sourceRect = CGRect(x: self.view!.bounds.midX, y: self.view!.bounds.midY,width: 0,height: 0)
+            activityController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.down
+            UIApplication.shared.windows.first?.rootViewController?.present(activityController, animated: true, completion: nil)
         }else if selection == "sendbugs" {
             
         }else if selection == "sendrequest" {
@@ -120,10 +129,8 @@ extension aboutVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSourc
             
         }
     }
-    
-    
-    
 }
+
     
 class AboutCell: UICollectionViewCell {
 
@@ -134,6 +141,7 @@ class AboutCell: UICollectionViewCell {
             titleLabel.text = data.title
         }
     }
+    
     fileprivate let bg: UIImageView = {
        let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
