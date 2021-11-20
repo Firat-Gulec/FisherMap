@@ -8,6 +8,7 @@
 import UIKit
 import NVActivityIndicatorView
 import StoreKit
+import MessageUI
 
 struct AboutData {
     var title: String
@@ -75,7 +76,45 @@ class aboutVC: UIViewController {
         backImageView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height)
     
     }
+    
+    //Send email func
+    func showMailComposer(subject: String) {
+        guard MFMailComposeViewController.canSendMail() else {
+            //show alert informing the user
+            return
+        }
+        let composer = MFMailComposeViewController()
+        composer.mailComposeDelegate = self
+        composer.setToRecipients(["firatgulecc@icloud.com"])
+        composer.setSubject(subject)
+        present(composer, animated: true)
+    }
 }
+
+// MARK: - Compose Mail Delegate
+
+extension aboutVC: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        if let _ = error {
+            //show error alert
+            controller.dismiss(animated: true)
+        }
+        switch result {
+        case .cancelled:
+            print("Cancelled")
+        case .saved:
+            print("Saved")
+        case .sent:
+            print("Email sent")
+        case .failed:
+            print("Failed to send")
+        @unknown default:
+            print("Failed to send")
+        }
+        controller.dismiss(animated: true)
+    }
+}
+
 
 // MARK: - Collection View properties
 
@@ -116,9 +155,9 @@ extension aboutVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSourc
             activityController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.down
             UIApplication.shared.windows.first?.rootViewController?.present(activityController, animated: true, completion: nil)
         }else if selection == "sendbugs" {
-            
+            self.showMailComposer(subject: "Help This Bugs!")
         }else if selection == "sendrequest" {
-            
+            self.showMailComposer(subject: "I need This Func!")
         }else if selection == "howtouse" {
             
         }else if selection == "privacy" {
@@ -129,7 +168,10 @@ extension aboutVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSourc
             
         }
     }
+    
 }
+
+
 
     
 class AboutCell: UICollectionViewCell {
