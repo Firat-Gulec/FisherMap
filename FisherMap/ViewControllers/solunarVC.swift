@@ -115,6 +115,17 @@ class solunarVC: UIViewController{
                     self.wfDescLabel.text = model.weather.first?.description ?? "TEST"
                     self.wfTempLabel.text = "\(Int(model.main.temp))°"
                     self.wftempHLLabel.text = "\(Int(model.main.temp))°   \(Int(model.main.feels_like))°"
+                    if model.weather.first?.main == "Clear" {
+                        self.backImageView.image = UIImage(named: "CLEAR-1")
+                    } else if model.weather.first?.main == "Clouds" {
+                        self.backImageView.image = UIImage(named: "CLOUDY")
+                    } else if model.weather.first?.main == "Rain" {
+                        self.backImageView.image = UIImage(named: "RAIN2")
+                    } else if model.weather.first?.main == "Clouds" {
+                        self.backImageView.image = UIImage(named: "CLOUDY")
+                    } else if model.weather.first?.main == "Snow" {
+                        self.backImageView.image = UIImage(named: "SNOW3")
+                    }
                     self.wfImageView.image = UIImage(named: "\(model.weather.first?.main ?? "TEST").png")
                     self.hmd = "%\(model.main.humidity)"
                     self.windspeed = "\(model.wind.speed)km/sa"
@@ -220,6 +231,7 @@ class solunarVC: UIViewController{
   
     override func viewWillAppear(_ animated: Bool) {
         backImageView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height)
+        backImageView.image = UIImage(named: "CLEAR-1")
         mainScrollView.frame = CGRect(x: 10, y: 10, width: view.frame.size.width - 20, height: view.frame.size.height - 20)
         mainScrollView.contentSize = CGSize(width: view.frame.size.width, height: 1000)
         wfLocationLabel.frame = CGRect(x: 20, y: 0, width: view.frame.size.width - 50, height: 35)

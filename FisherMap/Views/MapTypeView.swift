@@ -32,11 +32,22 @@ class MapTypeView: UIViewController,  CLLocationManagerDelegate {
     @IBOutlet weak var mpS3DButton: UIButton!
     
     override func viewDidLayoutSubviews() {
+        mpSatButton.layer.cornerRadius = 5
+        mpHybButton.layer.cornerRadius = 5
+        mpS3DButton.layer.cornerRadius = 5
+        mpStaButton.layer.cornerRadius = 5
+        mpSatButton.layer.masksToBounds = true
+        mpStaButton.layer.masksToBounds = true
+        mpHybButton.layer.masksToBounds = true
+        mpS3DButton.layer.masksToBounds = true
         mpTypeLabel.frame = CGRect(x: 20, y: 20, width: 300, height: 40)
         mpStaButton.frame = CGRect(x: 15, y: 75, width: (view.frame.size.width / 2) - 20, height: 120)
         mpSatButton.frame = CGRect(x: (view.frame.size.width / 2) + 5, y: 75, width: (view.frame.size.width / 2) - 20, height: 120)
         mpHybButton.frame = CGRect(x: 15, y: 205, width: (view.frame.size.width / 2) - 20, height: 120)
         mpS3DButton.frame = CGRect(x: (view.frame.size.width / 2) + 5, y: 205, width: (view.frame.size.width / 2) - 20, height: 120)
+        
+        
+        
         
         if !hasSetPointOrigin {
             hasSetPointOrigin = true

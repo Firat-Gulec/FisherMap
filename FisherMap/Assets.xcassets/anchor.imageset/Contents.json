@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "anchor.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "anchor_PNG11.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

@@ -53,7 +53,7 @@ class HourlyVC: UIViewController{
     
     
     fileprivate func startAnimation() {
-        let loading = NVActivityIndicatorView(frame: .zero, type: .ballPulseRise, color: .white, padding: 0)
+        let loading = NVActivityIndicatorView(frame: .zero, type: .ballPulseRise, color: .darkGray, padding: 0)
         loading.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(loading)
         NSLayoutConstraint.activate([
@@ -72,7 +72,7 @@ class HourlyVC: UIViewController{
             }
             
             self.view.addSubview(self.collectionView)
-            self.collectionView.backgroundColor = .white
+            self.collectionView.backgroundColor = .clear
             self.collectionView.delegate = self
             self.collectionView.dataSource = self
 

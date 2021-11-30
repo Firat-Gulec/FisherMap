@@ -250,8 +250,9 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
         floatingButton.addTarget(self, action: #selector(didTapPlusButton), for: .touchUpInside)
         measureButton.addTarget(self, action: #selector(didTapmeasureButton), for: .touchUpInside)
         setancorButton.addTarget(self, action: #selector(didTapsetancorButton), for: .touchUpInside)
-        savecatchButton.addTarget(self, action: #selector(didTapsavecatchButton), for: .touchUpInside)
+        //savecatchButton.addTarget(self, action: #selector(didTapsavecatchButton), for: .touchUpInside)
         savecurrentButton.addTarget(self, action: #selector(didTapsavecurrentButton), for: .touchUpInside)
+        savecatchButton.isHidden = true
         closeButton.addTarget(self, action: #selector(didTapcloseButton), for: .touchUpInside)
         addButton.addTarget(self, action: #selector(didTapaddButton), for: .touchUpInside)
         backButton.addTarget(self, action: #selector(didTapbackButton), for: .touchUpInside)
@@ -265,9 +266,9 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
         //PlusButtons set layout
         floatingButton.frame = CGRect(x: view.frame.size.width - 70, y: view.frame.size.height - 70, width: 60, height: 60)
         savecurrentButton.frame = CGRect(x: view.frame.size.width - 50, y: view.frame.size.height - 120, width: 40, height: 40)
-        savecatchButton.frame = CGRect(x: view.frame.size.width - 50, y: view.frame.size.height - 170, width: 40, height: 40)
-        setancorButton.frame = CGRect(x: view.frame.size.width - 50, y: view.frame.size.height - 220, width: 40, height: 40)
-        measureButton.frame = CGRect(x: view.frame.size.width - 50, y: view.frame.size.height - 270, width: 40, height: 40)
+        //savecatchButton.frame = CGRect(x: view.frame.size.width - 50, y: view.frame.size.height - 170, width: 40, height: 40)
+        setancorButton.frame = CGRect(x: view.frame.size.width - 50, y: view.frame.size.height - 170, width: 40, height: 40)
+        measureButton.frame = CGRect(x: view.frame.size.width - 50, y: view.frame.size.height - 220, width: 40, height: 40)
         aimImage.frame = CGRect(x: (view.frame.size.width / 2) - 20, y: (view.frame.size.height / 2) + 20, width: 40, height: 40)
         closeButton.frame = CGRect(x: view.frame.size.width - 70, y: view.frame.size.height - 70, width: 60, height: 60)
         addButton.frame = CGRect(x: view.frame.size.width - 120, y: view.frame.size.height - 55, width: 40, height: 40)
@@ -334,7 +335,7 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
             //Control Buttons are open..
             measureButton.isHidden = false
             setancorButton.isHidden = false
-            savecatchButton.isHidden = false
+            //savecatchButton.isHidden = false
             savecurrentButton.isHidden = false
         } else {
             image = UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32, weight: .medium))
@@ -343,7 +344,7 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
             //Control Buttons are close..
             measureButton.isHidden = true
             setancorButton.isHidden = true
-            savecatchButton.isHidden = true
+            //savecatchButton.isHidden = true
             savecurrentButton.isHidden = true
         }
     }
@@ -469,6 +470,7 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
         button.layer.cornerRadius = 20
         button.backgroundColor = .systemPink
         let image = UIImage(named: "compass.png")
+        button.imageEdgeInsets = UIEdgeInsets(top: 35, left: 35, bottom: 35, right: 35)
         button.setImage(image, for: .normal)
         button.tintColor = .white
         button.setTitleColor(.white, for: .normal)
@@ -484,6 +486,7 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
         button.layer.cornerRadius = 20
         button.backgroundColor = .systemPink
         let image = UIImage(named: "anchor.png")
+        button.imageEdgeInsets = UIEdgeInsets(top: 35, left: 35, bottom: 35, right: 35)
         button.setImage(image, for: .normal)
         button.tintColor = .white
         button.setTitleColor(.white, for: .normal)
@@ -513,10 +516,11 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
         //button.layer.masksToBounds = true
         button.layer.cornerRadius = 20
         button.backgroundColor = .systemPink
-        let image = UIImage(systemName: "pin.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .medium))
+        let image = UIImage(named: "pin_fishing.png")
+        button.imageEdgeInsets = UIEdgeInsets(top: 35, left: 35, bottom: 35, right: 35)
         button.setImage(image, for: .normal)
-        button.tintColor = .white
-        button.setTitleColor(.white, for: .normal)
+        //button.tintColor = .white
+        //button.setTitleColor(.white, for: .normal)
         return button
         
     }()
