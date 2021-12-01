@@ -57,7 +57,7 @@ class WeeklyVC: UIViewController {
     
     
     fileprivate func startAnimation() {
-        let loading = NVActivityIndicatorView(frame: .zero, type: .ballPulseRise, color: .darkGray, padding: 0)
+        let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .darkGray, padding: 0)
         loading.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(loading)
         NSLayoutConstraint.activate([
