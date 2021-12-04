@@ -36,18 +36,24 @@ class solunarVC: UIViewController{
     func sendDataVCs() {
         let cloudsVC = children[2] as? CloudsVC
         cloudsVC?.cloudsLabel.text = clouds
+        cloudsVC?.backgroundImage.image = UIImage(named: viewbg)
         let sunsetVC = children[3] as? SunsetVC
         sunsetVC?.sunsetLabel.text = sunset
+        sunsetVC?.backgroundImage.image = UIImage(named: viewbg)
         let windVC = children[4]  as? WindVC
         windVC?.windLabel.text = windspeed + winddeg
+        windVC?.backgroundImage.image = UIImage(named: viewbg)
         let sunriseVC = children[5] as? SunriseVC
         sunriseVC?.sunriseLabel.text = sunrise
+        sunriseVC?.backgroundImage.image = UIImage(named: viewbg)
         let eyeshotVC = children[6] as? EyeshotVC
         eyeshotVC?.eyeshotLabel.text = visibility
         eyeshotVC?.visib = visib
+        eyeshotVC?.backgroundImage.image = UIImage(named: viewbg)
         let humidtyVC = children[7]  as? HumidtyVC
         humidtyVC?.humidtyLabel.text = hmd
         humidtyVC?.humidity = humidity
+        humidtyVC?.backgroundImage.image = UIImage(named: viewbg)
     }
     
     var hmd = String()
@@ -57,6 +63,7 @@ class solunarVC: UIViewController{
     var sunrise = String()
     var sunset = String()
     var clouds = String()
+    var viewbg = String()
     var visibility = String()
     //var list: [List] = []
     var temp: [String] = []
@@ -117,14 +124,19 @@ class solunarVC: UIViewController{
                     self.wftempHLLabel.text = "\(Int(model.main.temp))°   \(Int(model.main.feels_like))°"
                     if model.weather.first?.main == "Clear" {
                         self.backImageView.image = UIImage(named: "CLEAR-1")
+                        self.viewbg = "clearbackground"
                     } else if model.weather.first?.main == "Clouds" {
                         self.backImageView.image = UIImage(named: "CLOUDY")
+                        self.viewbg = "cloudybackground"
                     } else if model.weather.first?.main == "Rain" {
                         self.backImageView.image = UIImage(named: "RAIN2")
+                        self.viewbg = "rainbackground"
                     } else if model.weather.first?.main == "Clouds" {
                         self.backImageView.image = UIImage(named: "CLOUDY")
+                        self.viewbg = "cloudybackground"
                     } else if model.weather.first?.main == "Snow" {
                         self.backImageView.image = UIImage(named: "SNOW3")
+                        self.viewbg = "snowrbackground"
                     }
                     self.wfImageView.image = UIImage(named: "\(model.weather.first?.main ?? "TEST").png")
                     self.hmd = "%\(model.main.humidity)"

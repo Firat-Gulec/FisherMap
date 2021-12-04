@@ -90,10 +90,13 @@ class fishingVC: UIViewController, ChartViewDelegate {
         fishGraphicView.frame = CGRect(x: 10, y: 190, width: view.frame.size.width - 20, height: view.frame.size.height / 3)
         fishingTimeView.frame = CGRect(x: 10, y: fishGraphicView.frame.size.height + 200, width: view.frame.size.width - 20, height: 200)
         fishGraphicView.isHidden = true
+        fishGraphicView.layer.cornerRadius = 10
+        fishingTimeView.layer.cornerRadius = 10
         fishingTimeView.isHidden = true
         lineChart.frame = CGRect(x: 0, y: 0, width: fishGraphicView.frame.width, height: fishGraphicView.frame.height)
         //self.lineChart.center = self.fishGraphicView.center
         fishGraphicView.addSubview(lineChart)
+        lineChart.layer.cornerRadius = 10
     }
     
     @IBAction func dayChange(_ sender: Any) {
@@ -169,6 +172,7 @@ class fishingVC: UIViewController, ChartViewDelegate {
                     self.lineChart.animate(xAxisDuration: 2.0)
                     self.fishGraphicView.isHidden = false
                     self.fishingTimeView.isHidden = false
+                    //self.lineChart.backgroundColor = .none
                     }
             }
             catch {

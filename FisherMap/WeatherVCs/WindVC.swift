@@ -12,6 +12,9 @@ class WindVC: UIViewController {
 
     @IBOutlet weak var windLabel: UILabel!
     
+    @IBOutlet weak var backgroundImage: UIImageView!
+    
+    
     var currentLocation = CLLocationCoordinate2D()
     
     var list = [List]()
@@ -32,6 +35,9 @@ class WindVC: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        backgroundImage.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height)
+    }
 
     /*
     // MARK: - Navigation

@@ -95,6 +95,7 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
         moonDescLabel.frame = CGRect(x: 25, y: 120, width: view.frame.size.width - 50, height: 35)
         moonPhaseLabel.frame = CGRect(x: 25, y: 150, width: view.frame.size.width - 50, height: 35)
         moonDatePicker.frame = CGRect(x: 25, y: 0, width: view.frame.size.width - 50, height: 35)
+        moonDatePicker.tintColor = .white
         //MoonView
         MoonView.frame = CGRect(x: 10, y: 190, width: view.frame.size.width - 20, height: 370)
         MoonLabel.frame = CGRect(x: 10, y: 5, width: MoonView.frame.size.width - 10, height: 35)

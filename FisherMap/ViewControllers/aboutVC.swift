@@ -62,7 +62,7 @@ class aboutVC: UIViewController {
             //create collectionview
             loading.stopAnimating()
             self.view.addSubview(self.collectionView)
-            //collectionView.backgroundColor = .white
+            self.collectionView.backgroundColor = .none
             self.collectionView.delegate = self
             self.collectionView.dataSource = self
             self.collectionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 10).isActive = true

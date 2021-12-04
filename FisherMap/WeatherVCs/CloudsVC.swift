@@ -12,13 +12,17 @@ class CloudsVC: UIViewController {
 
     
     @IBOutlet weak var cloudsLabel: UILabel!
-    
+    @IBOutlet weak var backgroundImage: UIImageView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        backgroundImage.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height)
     }
     
 

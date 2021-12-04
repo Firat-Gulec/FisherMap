@@ -12,6 +12,10 @@ class HumidtyVC: UIViewController {
 
     @IBOutlet weak var humidtyLabel: UILabel!
     
+    @IBOutlet weak var backgroundImage: UIImageView!
+    
+    
+    
     var text:String = ""
     
     var currentLocation = CLLocationCoordinate2D()
@@ -32,6 +36,10 @@ class HumidtyVC: UIViewController {
         super.viewDidLoad()
         //humidtyLabel?.text = text
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        backgroundImage.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height)
     }
     
 
