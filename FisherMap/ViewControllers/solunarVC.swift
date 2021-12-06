@@ -35,8 +35,13 @@ class solunarVC: UIViewController{
     
     func sendDataVCs() {
         let cloudsVC = children[2] as? CloudsVC
-        cloudsVC?.cloudsLabel.text = clouds
+        cloudsVC?.cloudsLabel.text = "%\(clouds)"
         cloudsVC?.backgroundImage.image = UIImage(named: viewbg)
+        cloudsVC?.cloudPieChartEntry.x = Double(clouds)!
+        cloudsVC?.cloudPieChartEntry.y = Double(clouds)!
+        cloudsVC?.cloudminPieChartEntry.x = Double(101 - Int(clouds)!)
+        cloudsVC?.cloudminPieChartEntry.y = Double(101 - Int(clouds)!)
+        cloudsVC?.updateChartData()
         let sunsetVC = children[3] as? SunsetVC
         sunsetVC?.sunsetLabel.text = sunset
         sunsetVC?.backgroundImage.image = UIImage(named: viewbg)
@@ -51,8 +56,16 @@ class solunarVC: UIViewController{
         eyeshotVC?.visib = visib
         eyeshotVC?.backgroundImage.image = UIImage(named: viewbg)
         let humidtyVC = children[7]  as? HumidtyVC
-        humidtyVC?.humidtyLabel.text = hmd
+        humidtyVC?.humidtyLabel.text = "%\(hmd)"
         humidtyVC?.humidity = humidity
+        humidtyVC?.hmdPieChartEntry.x = Double(hmd)!
+        humidtyVC?.hmdPieChartEntry.y = Double(hmd)!
+        humidtyVC?.hmdminPieChartEntry.x = Double(101 - Int(hmd)!)
+        humidtyVC?.hmdminPieChartEntry.y = Double(101 - Int(hmd)!)
+        humidtyVC?.updateChartData()
+        
+     
+        
         humidtyVC?.backgroundImage.image = UIImage(named: viewbg)
     }
     
@@ -139,7 +152,7 @@ class solunarVC: UIViewController{
                         self.viewbg = "snowrbackground"
                     }
                     self.wfImageView.image = UIImage(named: "\(model.weather.first?.main ?? "TEST").png")
-                    self.hmd = "%\(model.main.humidity)"
+                    self.hmd = "\(model.main.humidity)"
                     self.windspeed = "\(model.wind.speed)km/sa"
                     self.winddeg = "\(model.wind.deg)°"
                     var calendar = Calendar.current
@@ -152,7 +165,7 @@ class solunarVC: UIViewController{
                     let hourset = calendar.component(.hour, from: model.sys.sunset)
                     let minuteset = calendar.component(.minute, from: model.sys.sunset)
                     self.sunset = "\(hourset):\(minuteset)"
-                    self.clouds = "%\(model.clouds.all)"
+                    self.clouds = "\(model.clouds.all)"
                     self.visibility = "%\(model.visibility)"
                     //Send to ConteinerViews Data
                     self.sendDataVCs()

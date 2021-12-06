@@ -7,14 +7,18 @@
 
 import UIKit
 import CoreLocation
+import Charts
 
-class HumidtyVC: UIViewController {
+class HumidtyVC: UIViewController, ChartViewDelegate {
 
     @IBOutlet weak var humidtyLabel: UILabel!
-    
     @IBOutlet weak var backgroundImage: UIImageView!
+    @IBOutlet weak var humidtyPieChart: PieChartView!
     
-    
+    var hmdPieChartEntry = ChartDataEntry()
+    var hmdminPieChartEntry = ChartDataEntry()
+    var pieChart = PieChartView()
+    var entries = [ChartDataEntry]()
     
     var text:String = ""
     
@@ -35,12 +39,33 @@ class HumidtyVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //humidtyLabel?.text = text
+        pieChart.delegate = self
         // Do any additional setup after loading the view.
     }
     
+    func updateChartData() {
+        entries = [hmdPieChartEntry, hmdminPieChartEntry]
+        let set = PieChartDataSet(entries: entries)
+        set.colors = ChartColorTemplates.pastel()
+        set.label = ""
+        let data = PieChartData(dataSet: set)
+        
+        pieChart.data = data
+        pieChart.drawEntryLabelsEnabled = false
+        pieChart.data?.setDrawValues(false)
+        pieChart.drawEntryLabelsEnabled = false
+        pieChart.entryLabelColor = UIColor.clear
+        pieChart.drawCenterTextEnabled = false
+
+    }
+        
     override func viewWillAppear(_ animated: Bool) {
         backgroundImage.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height)
-    }
+        pieChart.frame = CGRect(x: 0, y: 10, width: view.frame.size.width, height: view.frame.size.height - 10) 
+        
+        //pieChart.center = view.center
+        view.addSubview(pieChart)
+        updateChartData()    }
     
 
     /*
