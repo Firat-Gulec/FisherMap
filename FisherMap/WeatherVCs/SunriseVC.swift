@@ -23,6 +23,7 @@ class SunriseVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         backgroundImage.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height)
+        backgroundImage.isHidden = true
     }
 
     /*

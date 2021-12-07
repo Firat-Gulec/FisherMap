@@ -20,6 +20,7 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
     var hourlySymbols:[String] = []
     var hourlyValues:[Int] = []
     var degree = Double()
+    var tempDegree = String()
     
     //SubTitle Labels
     @IBOutlet weak var backImageView: UIImageView!
@@ -72,8 +73,10 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
         //Metrik bilgisi
         if (Locale.current.usesMetricSystem == false) {
             self.metricSys = "imperial"
+            self.tempDegree = "F"
         }else {
             self.metricSys = "metric"
+            self.tempDegree = "C"
         }
         //burada çalışmak gerek son 2 yerine ilk 3 sonrası almak için! +11 sidney patlak
         gmtChar = "\(TimeZone.current.abbreviation()!)"
@@ -88,7 +91,7 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         backImageView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height)
-        mainScrollView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width - 10, height: view.frame.size.height - 10)
+        mainScrollView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width - 5, height: view.frame.size.height - 5)
         mainScrollView.contentSize = CGSize(width: view.frame.size.width, height: view.frame.size.height + 100)
         locationLabel.frame = CGRect(x: 25, y: 0, width: view.frame.size.width - 50, height: 35)
         mTypeImage.frame = CGRect(x: (view.frame.size.width / 2) - 35, y: 45, width: 70, height: 70)
@@ -174,8 +177,10 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
             //Metrik bilgisi
             if (Locale.current.usesMetricSystem == true) {
                 self.metricSys = "imperial"
+                self.tempDegree = "F"
             }else {
                 self.metricSys = "metric"
+                self.tempDegree = "C"
             }
             //burada çalışmak gerek son 2 yerine ilk 3 sonrası almak için! +11 sidney patlak
             self.gmtChar = "\(TimeZone.current.abbreviation()!)"

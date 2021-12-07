@@ -32,6 +32,8 @@ class solunarVC: UIViewController{
     var langChar = String()
     var metricSys = String()
     var gmtChar = String()
+    var tempDegree = String()
+    var distance = String()
     
     func sendDataVCs() {
         let cloudsVC = children[2] as? CloudsVC
@@ -46,7 +48,9 @@ class solunarVC: UIViewController{
         sunsetVC?.sunsetLabel.text = sunset
         sunsetVC?.backgroundImage.image = UIImage(named: viewbg)
         let windVC = children[4]  as? WindVC
-        windVC?.windLabel.text = windspeed + winddeg
+        windVC?.windLabel.text = windspeed + " " + winddeg
+        windVC?.windLabel.numberOfLines = 2
+        windVC?.windLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         windVC?.backgroundImage.image = UIImage(named: viewbg)
         let sunriseVC = children[5] as? SunriseVC
         sunriseVC?.sunriseLabel.text = sunrise
@@ -133,8 +137,8 @@ class solunarVC: UIViewController{
                 DispatchQueue.main.async {
                     self.wfLocationLabel.text = model.name
                     self.wfDescLabel.text = model.weather.first?.description ?? "TEST"
-                    self.wfTempLabel.text = "\(Int(model.main.temp))°"
-                    self.wftempHLLabel.text = "\(Int(model.main.temp))°   \(Int(model.main.feels_like))°"
+                    self.wfTempLabel.text = "\(Int(model.main.temp))" + self.tempDegree
+                    self.wftempHLLabel.text = "\(Int(model.main.temp))\(self.tempDegree)   \(Int(model.main.feels_like))" + self.tempDegree
                     if model.weather.first?.main == "Clear" {
                         self.backImageView.image = UIImage(named: "CLEAR-1")
                         self.viewbg = "clearbackground"
@@ -153,7 +157,7 @@ class solunarVC: UIViewController{
                     }
                     self.wfImageView.image = UIImage(named: "\(model.weather.first?.main ?? "TEST").png")
                     self.hmd = "\(model.main.humidity)"
-                    self.windspeed = "\(model.wind.speed)km/sa"
+                    self.windspeed = "\(model.wind.speed)" + " " + self.distance
                     self.winddeg = "\(model.wind.deg)°"
                     var calendar = Calendar.current
                     if let timeZone = TimeZone(identifier: self.langChar) {
@@ -193,10 +197,10 @@ class solunarVC: UIViewController{
                 let decodedResponse = try? JSONDecoder().decode(WeatherForecast.self, from: fdata)
                            DispatchQueue.main.async {
                                for i in decodedResponse!.list {
-                                        self.temp.append(String(i.main.temp))
-                                        self.temp_max.append("\(i.main.temp_max)")
-                                        self.temp_min.append("\(i.main.temp_min)")
-                                        self.feels_like.append("\(i.main.feels_like)")
+                                   self.temp.append(String(i.main.temp) + self.tempDegree)
+                                        self.temp_max.append("\(i.main.temp_max)\(self.tempDegree)")
+                                        self.temp_min.append("\(i.main.temp_min)\(self.tempDegree)")
+                                        self.feels_like.append("\(i.main.feels_like)\(self.tempDegree)")
                                         self.humidity.append("\(i.main.humidity)")
                                         self.dt_txt.append("\(i.dt_txt)")
                                         self.visib.append("\(i.visibility)")
@@ -257,7 +261,7 @@ class solunarVC: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         backImageView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height)
         backImageView.image = UIImage(named: "CLEAR-1")
-        mainScrollView.frame = CGRect(x: 10, y: 10, width: view.frame.size.width - 20, height: view.frame.size.height - 20)
+        mainScrollView.frame = CGRect(x: 10, y: 10, width: view.frame.size.width - 5, height: view.frame.size.height - 5)
         mainScrollView.contentSize = CGSize(width: view.frame.size.width, height: 1000)
         wfLocationLabel.frame = CGRect(x: 20, y: 0, width: view.frame.size.width - 50, height: 35)
         wfImageView.frame = CGRect(x: 20, y: 35, width: view.frame.size.width - 60, height: 60)
@@ -316,12 +320,16 @@ class solunarVC: UIViewController{
          langChar = Locale.current.identifier
          let langIndex = langChar.index(langChar.startIndex, offsetBy: 2)
          langChar = String(langChar[..<langIndex])    // "My
-         //Metrik bilgisi
-         if (Locale.current.usesMetricSystem == false) {
-             metricSys = "imperial"
-         }else {
-             metricSys = "metric"
-         }
+        //Metrik bilgisi
+        if (Locale.current.usesMetricSystem == false) {
+            self.metricSys = "imperial"
+            self.tempDegree = "°F"
+            self.distance = "mile/hour"
+        }else {
+            self.metricSys = "metric"
+            self.tempDegree = "°C"
+            self.distance = "km/hour"
+        }
          //burada çalışmak gerek son 2 yerine ilk 3 sonrası almak için! +11 sidney patlak
          gmtChar = "\(TimeZone.current.abbreviation()!)"
          

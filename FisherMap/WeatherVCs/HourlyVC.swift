@@ -110,16 +110,29 @@ extension HourlyVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
 
 class CustomCell: UICollectionViewCell {
     
+    var metricSys = String()
+    var tempDegree = String()
+    
     var data: HourlyData? {
         didSet {
             guard let data = data else {
                 return
             }
+            
+            if (Locale.current.usesMetricSystem == false) {
+                metricSys = "imperial"
+                tempDegree = "°F"
+            }else {
+                metricSys = "metric"
+                tempDegree = "°C"
+            }
+            
             mainImageView.image = UIImage(named: data.mainn)
             descripLabel.text = data.descripp
             let hour = Array(data.date)
             hourLabel.text = String(hour[11..<16])
-            tempLabel.text = data.tempp + "°C"
+            let tempy = Array(data.tempp)
+            tempLabel.text = String(tempy[0..<2]) + self.tempDegree
         }
     }
     
@@ -134,7 +147,10 @@ class CustomCell: UICollectionViewCell {
     let hourLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.textColor = .white
+        label.textColor = .systemBlue
+        label.backgroundColor = .white
+        label.layer.masksToBounds = true
+        label.layer.cornerRadius = 3
         label.textAlignment = .center
         return label
     }()
@@ -149,8 +165,8 @@ class CustomCell: UICollectionViewCell {
     
     let tempLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 14)
-        label.textColor = .white
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textColor = .green
         return label
     }()
     
@@ -185,7 +201,7 @@ class CustomCell: UICollectionViewCell {
         tempLabel.anchor(top: mainImageView.topAnchor, left: mainImageView.rightAnchor, bottom: nil, right: nil, paddingTop: 15, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         
         addSubview(hourLabel)
-        hourLabel.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: nil, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 120, height: 0)
+        hourLabel.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: nil, paddingTop: 10, paddingLeft: 35, paddingBottom: 0, paddingRight: 0, width: 50, height: 22)
         
         
    

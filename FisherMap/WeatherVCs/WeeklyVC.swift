@@ -36,6 +36,7 @@ class WeeklyVC: UIViewController {
     var main: [String] = []
     var descrip: [String] = []
     var first = [String]()
+   
     
     
     fileprivate let collectionView:UICollectionView = {
@@ -53,6 +54,7 @@ class WeeklyVC: UIViewController {
         super.viewDidLoad()
         startAnimation()
         // Do any additional setup after loading the view.
+        
     }
     
     
@@ -110,39 +112,60 @@ extension WeeklyVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
 
 class WeeklyCustomCell: UICollectionViewCell {
     
+    var metricSys = String()
+    var tempDegree = String()
+    
+   
+    
+    
     var data: WeeklyData? {
         didSet {
             guard let data = data else {
                 return
             }
+            
+            if (Locale.current.usesMetricSystem == false) {
+                metricSys = "imperial"
+                tempDegree = "°F"
+            }else {
+                metricSys = "metric"
+                tempDegree = "°C"
+            }
+            
             let hour = Array(data.date)
             dateLabel.text = String(hour[8..<10])
             hourLabel.text = String(hour[11..<16])
             mainImageView.image = UIImage(named: data.mainn)
             
             let tempy = Array(data.tempp)
-            tempLabel.text = String(tempy[0..<2]) + "°C"
-            descripLabel.text = data.mainn
-            tmaxImageView.image = UIImage(named: "sunset")
+            tempLabel.text = String(tempy[0..<2]) + self.tempDegree
+            descripLabel.text = data.descripp
+            descripLabel.numberOfLines = 2
+            descripLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+            descripLabel.sizeToFit()
+            tmaxImageView.image = UIImage(systemName: "arrow.up")
+            tmaxImageView.tintColor = .white
             let tempymax = Array(data.temp_maxx)
             tmaxLabel.text = String(tempymax[0..<2])
-            tminImageView.image = UIImage(named: "sunrise")
+            tminImageView.image = UIImage(systemName: "arrow.down")
+            tminImageView.tintColor = .white
             let tempymin = Array(data.temp_minn)
             tminLabel.text = String(tempymin[0..<2])
-            hmdImageView.image = UIImage(named: "humidity")
+            hmdImageView.image = UIImage(systemName: "humidity.fill")
+            hmdImageView.tintColor = .white
             let humid = Array(data.humidityy)
-            humidityLabel.text = String(humid[0..<2])
+            humidityLabel.text = "%" + String(humid[0..<2])
             
         }
     }
     
     let dateLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 12)
-        label.textColor = .white
-        label.backgroundColor = .darkGray
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.textColor = .systemBlue
+        label.backgroundColor = .white
         label.layer.masksToBounds = true
-        label.layer.cornerRadius = 5
+        label.layer.cornerRadius = 3
         label.textAlignment = .center
         return label
     }()
@@ -150,10 +173,10 @@ class WeeklyCustomCell: UICollectionViewCell {
     let hourLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 12)
-        label.textColor = .white
-        label.backgroundColor = .darkGray
+        label.textColor = .darkGray
+        label.backgroundColor = .white
         label.layer.masksToBounds = true
-        label.layer.cornerRadius = 5
+        label.layer.cornerRadius = 3
         label.textAlignment = .center
         return label
     }()
@@ -171,6 +194,7 @@ class WeeklyCustomCell: UICollectionViewCell {
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textColor = .white
         label.textAlignment = .left
+        label.sizeToFit()
         return label
     }()
     
@@ -181,7 +205,7 @@ class WeeklyCustomCell: UICollectionViewCell {
         label.layer.masksToBounds = true
         label.layer.cornerRadius = 5
         label.textAlignment = .center
-        label.textColor = .white
+        label.textColor = .systemGreen
         return label
     }()
     
@@ -275,11 +299,11 @@ class WeeklyCustomCell: UICollectionViewCell {
         tempLabel.anchor(top: topAnchor, left: mainImageView.rightAnchor, bottom: nil, right: nil, paddingTop: 20, paddingLeft: 3, paddingBottom: 0, paddingRight: 0, width: 40, height: 25)
         
         addSubview(descripLabel)
-        descripLabel.anchor(top: topAnchor, left: tempLabel.rightAnchor, bottom: nil, right: nil, paddingTop: 20, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 75, height: 25)
+        descripLabel.anchor(top: topAnchor, left: tempLabel.rightAnchor, bottom: nil, right: nil, paddingTop: 5, paddingLeft: 3, paddingBottom: 0, paddingRight: 0, width: 75, height: 50)
         //
         
         addSubview(tmaxImageView)
-        tmaxImageView.anchor(top: topAnchor, left: descripLabel.rightAnchor, bottom: nil, right: nil, paddingTop: 20, paddingLeft: 3, paddingBottom: 0, paddingRight: 0, width: 25, height: 25)
+        tmaxImageView.anchor(top: topAnchor, left: descripLabel.rightAnchor, bottom: nil, right: nil, paddingTop: 20, paddingLeft: 3, paddingBottom: 0, paddingRight: 0, width: 20, height: 20)
         tmaxImageView.layer.cornerRadius = 20 / 2
         tmaxImageView.layer.shadowRadius = 10
         //profileImageView.layer.opacity = 0.3
@@ -289,7 +313,7 @@ class WeeklyCustomCell: UICollectionViewCell {
         tmaxLabel.anchor(top: topAnchor, left: tmaxImageView.rightAnchor, bottom: nil, right: nil, paddingTop: 20, paddingLeft: 3, paddingBottom: 0, paddingRight: 0, width: 20, height: 25)
         
         addSubview(tminImageView)
-        tminImageView.anchor(top: topAnchor, left: tmaxLabel.rightAnchor, bottom: nil, right: nil, paddingTop: 20, paddingLeft: 3, paddingBottom: 0, paddingRight: 0, width: 25, height: 25)
+        tminImageView.anchor(top: topAnchor, left: tmaxLabel.rightAnchor, bottom: nil, right: nil, paddingTop: 20, paddingLeft: 3, paddingBottom: 0, paddingRight: 0, width: 20, height: 20)
         tminImageView.layer.cornerRadius = 20 / 2
         tminImageView.layer.shadowRadius = 10
         //profileImageView.layer.opacity = 0.3
@@ -299,14 +323,14 @@ class WeeklyCustomCell: UICollectionViewCell {
         tminLabel.anchor(top: topAnchor, left: tminImageView.rightAnchor, bottom: nil, right: nil, paddingTop: 20, paddingLeft: 3, paddingBottom: 0, paddingRight: 0, width: 20, height: 25)
         
         addSubview(hmdImageView)
-        hmdImageView.anchor(top: topAnchor, left: tminLabel.rightAnchor, bottom: nil, right: nil, paddingTop: 20, paddingLeft: 3, paddingBottom: 0, paddingRight: 0, width: 25, height: 25)
+        hmdImageView.anchor(top: topAnchor, left: tminLabel.rightAnchor, bottom: nil, right: nil, paddingTop: 20, paddingLeft: 3, paddingBottom: 0, paddingRight: 0, width: 20, height: 20)
         hmdImageView.layer.cornerRadius = 20 / 2
         hmdImageView.layer.shadowRadius = 10
         //profileImageView.layer.opacity = 0.3
        // profileImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
      
         addSubview(humidityLabel)
-        humidityLabel.anchor(top: topAnchor, left: hmdImageView.rightAnchor, bottom: nil, right: nil, paddingTop: 20, paddingLeft: 3, paddingBottom: 0, paddingRight: 0, width: 25, height: 25)
+        humidityLabel.anchor(top: topAnchor, left: hmdImageView.rightAnchor, bottom: nil, right: nil, paddingTop: 20, paddingLeft: 3, paddingBottom: 0, paddingRight: 0, width: 30, height: 25)
    
     }
 }

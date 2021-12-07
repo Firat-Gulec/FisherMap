@@ -46,7 +46,7 @@ class HumidtyVC: UIViewController, ChartViewDelegate {
     func updateChartData() {
         entries = [hmdPieChartEntry, hmdminPieChartEntry]
         let set = PieChartDataSet(entries: entries)
-        set.colors = ChartColorTemplates.pastel()
+        set.colors = ChartColorTemplates.material()
         set.label = ""
         let data = PieChartData(dataSet: set)
         
@@ -61,8 +61,8 @@ class HumidtyVC: UIViewController, ChartViewDelegate {
         
     override func viewWillAppear(_ animated: Bool) {
         backgroundImage.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height)
-        pieChart.frame = CGRect(x: 0, y: 10, width: view.frame.size.width, height: view.frame.size.height - 10) 
-        
+        pieChart.frame = CGRect(x: 35, y: 30, width: view.frame.size.width, height: view.frame.size.height - 10)
+        backgroundImage.isHidden = true
         //pieChart.center = view.center
         view.addSubview(pieChart)
         updateChartData()    }

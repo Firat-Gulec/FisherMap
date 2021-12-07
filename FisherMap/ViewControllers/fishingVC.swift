@@ -81,7 +81,7 @@ class fishingVC: UIViewController, ChartViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         backImage.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height)
-        fishingscrollView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width - 10, height: view.frame.size.height - 10)
+        fishingscrollView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width - 5, height: view.frame.size.height - 5)
         fishingscrollView.contentSize = CGSize(width: view.frame.size.width, height: 900)
         fishingLocLabel.frame = CGRect(x: 25, y: 0, width: view.frame.size.width - 50, height: 35)
         dayRateImage.frame = CGRect(x: (view.frame.size.width / 2) - 35, y: 45, width: 70, height: 70)
@@ -152,12 +152,13 @@ class fishingVC: UIViewController, ChartViewDelegate {
                         entries.append(ChartDataEntry(x: Double(sybolson[sort]), y: Double(self.hourlyValues[sybolson[sort]])))
                     }
                     let set = LineChartDataSet(entries: entries, label: "Hourly Data")
-                    //set.colors = ChartColorTemplates.material()
+                    set.label = ""
                     set.drawCirclesEnabled = false
                     set.mode = .cubicBezier
                     set.lineWidth = 2
-                    set.setColor(.gray)
-                    set.fill = Fill(color: .darkGray)
+                    set.colors = ChartColorTemplates.material()
+                    //set.setColor(.gray)
+                    //set.fill = Fill(color: .darkGray)
                     set.fillAlpha = 0.8
                     set.drawFilledEnabled = true
                     self.lineChart.data?.clearValues()
