@@ -29,6 +29,9 @@ class solunarVC: UIViewController{
     @IBOutlet weak var wftempHLLabel: UILabel!
     @IBOutlet weak var wfDescLabel: UILabel!
     
+    @IBOutlet weak var hourlyLabel: UILabel!
+    @IBOutlet weak var weeklyLabel: UILabel!
+    
     var langChar = String()
     var metricSys = String()
     var gmtChar = String()
@@ -268,22 +271,34 @@ class solunarVC: UIViewController{
         wfTempLabel.frame = CGRect(x: 20, y: 90, width: view.frame.size.width - 50, height: 60)
         wfDescLabel.frame = CGRect(x: 20, y: 130, width: view.frame.size.width - 50, height: 35)
         wftempHLLabel.frame = CGRect(x: 20, y: 150, width: view.frame.size.width - 50, height: 35)
-        hourlyCView.frame = CGRect(x: 10, y: 200, width: view.frame.size.width - 30, height: 100)
-        weeklyCView.frame = CGRect(x: 10, y: 315, width: view.frame.size.width - 30, height: 200)
-        cloudsCView.frame = CGRect(x: 10, y: 530, width: (view.frame.size.width / 2) - 20, height: 120)
-        SunsetCView.frame = CGRect(x: (view.frame.size.width / 2), y: 530, width: (view.frame.size.width / 2) - 20, height: 120)
-        windCView.frame = CGRect(x: 10, y: 665, width: (view.frame.size.width / 2) - 20, height: 120)
-        sunriseCView.frame = CGRect(x: (view.frame.size.width / 2), y: 665, width: (view.frame.size.width / 2) - 20, height: 120)
-        eyeshotCView.frame = CGRect(x: 10, y: 800, width: (view.frame.size.width / 2) - 20, height: 120)
-        humidityCView.frame = CGRect(x: (view.frame.size.width / 2), y: 800, width: (view.frame.size.width / 2) - 20, height: 120)
+        hourlyLabel.frame = CGRect(x: 10, y: 600, width: view.frame.size.width - 30, height: 25)
+        hourlyCView.frame = CGRect(x: 10, y: 630, width: view.frame.size.width - 30, height: 100)
+        weeklyLabel.frame = CGRect(x: 10, y: 740, width: view.frame.size.width - 30, height: 35)
+        weeklyCView.frame = CGRect(x: 10, y: 780, width: view.frame.size.width - 30, height: 200)
+        cloudsCView.frame = CGRect(x: 10, y: 200, width: (view.frame.size.width / 2) - 20, height: 120)
+        SunsetCView.frame = CGRect(x: (view.frame.size.width / 2), y: 200, width: (view.frame.size.width / 2) - 20, height: 120)
+        windCView.frame = CGRect(x: 10, y: 335, width: (view.frame.size.width / 2) - 20, height: 120)
+        sunriseCView.frame = CGRect(x: (view.frame.size.width / 2), y: 335, width: (view.frame.size.width / 2) - 20, height: 120)
+        eyeshotCView.frame = CGRect(x: 10, y: 470, width: (view.frame.size.width / 2) - 20, height: 120)
+        humidityCView.frame = CGRect(x: (view.frame.size.width / 2), y: 470, width: (view.frame.size.width / 2) - 20, height: 120)
         hourlyCView.layer.shadowRadius = 10
         hourlyCView.layer.shadowOpacity = 0.3
         hourlyCView.layer.cornerRadius = 10
         hourlyCView.layer.masksToBounds = true
+        hourlyLabel.layer.shadowRadius = 10
+        hourlyLabel.layer.shadowOpacity = 0.3
+        hourlyLabel.layer.cornerRadius = 7
+        hourlyLabel.layer.masksToBounds = true
+        hourlyLabel.backgroundColor = .darkGray
         weeklyCView.layer.shadowRadius = 10
         weeklyCView.layer.shadowOpacity = 0.3
         weeklyCView.layer.cornerRadius = 10
         weeklyCView.layer.masksToBounds = true
+        weeklyLabel.layer.shadowRadius = 10
+        weeklyLabel.layer.shadowOpacity = 0.3
+        weeklyLabel.layer.cornerRadius = 7
+        weeklyLabel.layer.masksToBounds = true
+        weeklyLabel.backgroundColor = .darkGray
         cloudsCView.layer.shadowRadius = 10
         cloudsCView.layer.shadowOpacity = 0.3
         cloudsCView.layer.cornerRadius = 10

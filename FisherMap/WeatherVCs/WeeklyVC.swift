@@ -103,7 +103,7 @@ extension WeeklyVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! WeeklyCustomCell
         cell.backgroundColor = .darkGray
-        cell.layer.cornerRadius = 12
+        cell.layer.cornerRadius = 7
         cell.data = self.data[indexPath.item]
         return cell
     }

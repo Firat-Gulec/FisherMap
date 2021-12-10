@@ -49,12 +49,24 @@ class PinLocationView: UIViewController, MKMapViewDelegate, CLLocationManagerDel
     }
     
     override func viewDidLayoutSubviews() {
-        saveButton.frame = CGRect(x: view.frame.size.width - 75, y: 20, width: 70, height: 55)
-        cancelButton.frame = CGRect(x: view.frame.size.width - 130, y: 20, width: 70, height: 55)
+        saveButton.frame = CGRect(x: view.frame.size.width - 90, y: 40, width: 80, height: 35)
+        cancelButton.frame = CGRect(x: view.frame.size.width - 180, y: 40, width: 80, height: 35)
         titleLabel.frame = CGRect(x: 20, y: 20, width: 235, height: 60)
         locationImage.frame = CGRect(x: (view.frame.size.width / 2)-25, y: 100, width: 50, height: 50)
         titleTextField.frame = CGRect(x: 25, y: 190, width: view.frame.size.width - 50, height: 35)
         subtitleTextField.frame = CGRect(x: 25, y: 240, width: view.frame.size.width - 50, height: 35)
+        
+        let bottomLine = CALayer()
+        bottomLine.frame = CGRect(x: 0, y: titleTextField.frame.height - 2, width: titleTextField.frame.width, height: 2)
+        bottomLine.backgroundColor = UIColor.init(red: 48/255, green: 173/255, blue: 99/255, alpha: 1).cgColor
+        titleTextField.borderStyle = .none
+        titleTextField.layer.addSublayer(bottomLine)
+        let bottomLinee = CALayer()
+        bottomLinee.frame = CGRect(x: 0, y: subtitleTextField.frame.height - 2, width: subtitleTextField.frame.width, height: 2)
+        bottomLinee.backgroundColor = UIColor.init(red: 48/255, green: 173/255, blue: 99/255, alpha: 1).cgColor
+        subtitleTextField.borderStyle = .none
+        subtitleTextField.layer.addSublayer(bottomLinee)
+        
         createDatePicker.frame = CGRect(x: 25, y: 290, width: view.frame.size.width - 50, height: 35)
         favoriteButton.frame = CGRect(x: 25, y: 340, width: view.frame.size.width - 50, height: 40)
       /*  let image = UIImage(systemName: "heart.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 18, weight: .medium))
@@ -67,6 +79,11 @@ class PinLocationView: UIViewController, MKMapViewDelegate, CLLocationManagerDel
             hasSetPointOrigin = true
             pointOrigin = self.view.frame.origin
         }
+    }
+    
+    
+    @IBAction func favoriteButton(_ sender: Any) {
+        
     }
     
    

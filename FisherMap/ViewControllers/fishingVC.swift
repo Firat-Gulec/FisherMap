@@ -31,8 +31,18 @@ class fishingVC: UIViewController, ChartViewDelegate {
     @IBOutlet weak var dayRateImage: UIImageView!
     @IBOutlet weak var dayDiscLabel: UILabel!
     @IBOutlet weak var dayDatePicker: UIDatePicker!
+    @IBOutlet weak var fishgraphLabel: UILabel!
     @IBOutlet weak var fishGraphicView: UIView!
     @IBOutlet weak var fishingTimeView: UIView!
+    //Major - Minor Times objects
+    @IBOutlet weak var majorImage: UIImageView!
+    @IBOutlet weak var minorImage: UIImageView!
+    @IBOutlet weak var majorstartLabel: UILabel!
+    @IBOutlet weak var majorstopLabel: UILabel!
+    @IBOutlet weak var minorstartLabel: UILabel!
+    @IBOutlet weak var minorstopLabel: UILabel!
+    @IBOutlet weak var majminLabel: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,18 +92,29 @@ class fishingVC: UIViewController, ChartViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         backImage.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height)
         fishingscrollView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width - 5, height: view.frame.size.height - 5)
-        fishingscrollView.contentSize = CGSize(width: view.frame.size.width, height: 900)
+        fishingscrollView.contentSize = CGSize(width: view.frame.size.width, height: view.frame.size.height + 100)
         fishingLocLabel.frame = CGRect(x: 25, y: 0, width: view.frame.size.width - 50, height: 35)
         dayRateImage.frame = CGRect(x: (view.frame.size.width / 2) - 35, y: 45, width: 70, height: 70)
         dayDiscLabel.frame = CGRect(x: 25, y: 120, width: view.frame.size.width - 50, height: 35)
         dayDatePicker.frame = CGRect(x: 25, y: 0, width: view.frame.size.width - 50, height: 35)
         fishGraphicView.frame = CGRect(x: 10, y: 190, width: view.frame.size.width - 20, height: view.frame.size.height / 3)
+        fishgraphLabel.frame = CGRect(x: 15, y: 5, width: view.frame.size.width - 20, height: 25)
         fishingTimeView.frame = CGRect(x: 10, y: fishGraphicView.frame.size.height + 200, width: view.frame.size.width - 20, height: 200)
+        majminLabel.frame = CGRect(x: 15, y: 5, width: fishingTimeView.frame.size.width - 15, height: 25)
+        majorImage.frame = CGRect(x: 15, y: 30, width: (fishingTimeView.frame.size.width / 2) - 20, height: fishingTimeView.frame.size.height - 50)
+        minorImage.frame = CGRect(x: majorImage.frame.size.width + 25, y: 30, width: majorImage.frame.size.width, height: fishingTimeView.frame.size.height - 50)
+        minorImage.layer.cornerRadius = 10
+        majorImage.layer.cornerRadius = 10
+        majorstartLabel.frame = CGRect(x: 15, y: 45, width: (fishingTimeView.frame.size.width / 2) - 30, height: 25)
+        majorstopLabel.frame = CGRect(x: 15, y: majorImage.frame.size.height, width: (fishingTimeView.frame.size.width / 2) - 30, height: 25)
+        minorstartLabel.frame = CGRect(x: majorImage.frame.size.width + 25, y: 45, width: majorImage.frame.size.width - 15, height: 25)
+        minorstopLabel.frame = CGRect(x: majorImage.frame.size.width + 25, y: majorImage.frame.size.height, width: majorImage.frame.size.width - 15, height: 25)
+        
         fishGraphicView.isHidden = true
         fishGraphicView.layer.cornerRadius = 10
         fishingTimeView.layer.cornerRadius = 10
         fishingTimeView.isHidden = true
-        lineChart.frame = CGRect(x: 0, y: 0, width: fishGraphicView.frame.width, height: fishGraphicView.frame.height)
+        lineChart.frame = CGRect(x: 0, y: 25, width: fishGraphicView.frame.width, height: fishGraphicView.frame.height - 25)
         //self.lineChart.center = self.fishGraphicView.center
         fishGraphicView.addSubview(lineChart)
         lineChart.layer.cornerRadius = 10
@@ -105,7 +126,7 @@ class fishingVC: UIViewController, ChartViewDelegate {
         lineChart.removeFromSuperview()
         lineChart.lineData?.clearValues()
         lineChart.clearAllViewportJobs()
-        lineChart.frame = CGRect(x: 0, y: 0, width: fishGraphicView.frame.width, height: fishGraphicView.frame.height)
+        lineChart.frame = CGRect(x: 0, y: 25, width: fishGraphicView.frame.width, height: fishGraphicView.frame.height - 25)
         fishGraphicView.addSubview(lineChart)
         startAnimation()
     }
@@ -136,17 +157,22 @@ class fishingVC: UIViewController, ChartViewDelegate {
                     let sybolson = symbolssorted.map{$0.offset}
                     //print("\(self.hourlyValues)")
                     entries.removeAll()
+                    self.dayDiscLabel.text = "\(model.dayRating)"
+                    self.majorstartLabel.text = "\(model.major1Start!) - \(model.major1Stop!)"
+                    self.majorstopLabel.text = "\(model.major2Start!) - \(model.major2Stop!)"
+                    self.minorstartLabel.text = "\(model.minor1Start!) - \(model.minor1Stop!)"
+                    self.minorstopLabel.text = "\(model.minor2Start!) - \(model.minor2Stop!)"
                     self.lineChart.rightAxis.enabled = false
                     self.lineChart.leftAxis.labelPosition = .outsideChart
                     self.lineChart.leftAxis.labelFont = .boldSystemFont(ofSize: 12)
                     self.lineChart.leftAxis.setLabelCount(6, force: false)
-                    //self.lineChart.leftAxis.labelTextColor = .black
+                    self.lineChart.leftAxis.labelTextColor = .white
                     self.lineChart.leftAxis.axisLineColor = .systemBlue
                     self.lineChart.xAxis.enabled = true
                     self.lineChart.xAxis.labelPosition = .bottom
                     self.lineChart.xAxis.labelFont = .boldSystemFont(ofSize: 12)
                     self.lineChart.xAxis.setLabelCount(6, force: false)
-                    //self.lineChart.xAxis.labelTextColor = .black
+                    self.lineChart.xAxis.labelTextColor = .white
                     self.lineChart.xAxis.axisLineColor = .systemBlue
                     for sort in sybolson {
                         entries.append(ChartDataEntry(x: Double(sybolson[sort]), y: Double(self.hourlyValues[sybolson[sort]])))
@@ -156,9 +182,9 @@ class fishingVC: UIViewController, ChartViewDelegate {
                     set.drawCirclesEnabled = false
                     set.mode = .cubicBezier
                     set.lineWidth = 2
-                    set.colors = ChartColorTemplates.material()
-                    //set.setColor(.gray)
-                    //set.fill = Fill(color: .darkGray)
+                    //set.colors = ChartColorTemplates.material()
+                    set.setColor(.black)
+                    set.fill = Fill(color: .black)
                     set.fillAlpha = 0.8
                     set.drawFilledEnabled = true
                     self.lineChart.data?.clearValues()
