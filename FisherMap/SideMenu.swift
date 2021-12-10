@@ -13,13 +13,13 @@ protocol MenuControllerDelegate {
 }
 
 enum SideMenuItem: String, CaseIterable {
-    case buying = "Start 7- Day Free Trial"
-    case map = "Map"
+    case buying = "How to Use"
+// case map = "Map"
     case locations = "Locations"
     case fishing = "Fishing"
     case weather = "Solunar"
     case solunar = "Weather"
-    case settings = "Settings"
+//case settings = "Settings"
     case about = "About"
 }
 
@@ -43,7 +43,7 @@ class MenuController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Fishing Points".localized()
+        title = "Fishing Map".localized()
         tableView.backgroundColor = color
         view.backgroundColor = color
     }

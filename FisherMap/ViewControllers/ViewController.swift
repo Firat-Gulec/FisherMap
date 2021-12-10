@@ -16,8 +16,9 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
     // MARK: - My protocols func here..
     func sendmapType(mapType: MKMapType) {
         mapView.mapType = mapType
-        //mapView.reloadInputViews()
+        getAllAnnonations()
     }
+    
     func sendData(coordinate: CLLocationCoordinate2D, title: String, subtitle: String) {
         let pinAnnonation = AnnonationModel(title: title, subtitle: subtitle, coordinate: coordinate, info: "test", favorite: true, createDate: Date())
         mapView.addAnnotation(pinAnnonation)
@@ -173,6 +174,7 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
     func startTackingUserLocation() {
         mapView.showsUserLocation = true
         locationManager.startUpdatingLocation()
+        
         previousLocation = getCenterLocation(for: mapView)
     }
     
@@ -249,10 +251,11 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
         pointcountLabel.isHidden = true
         floatingButton.addTarget(self, action: #selector(didTapPlusButton), for: .touchUpInside)
         measureButton.addTarget(self, action: #selector(didTapmeasureButton), for: .touchUpInside)
-        setancorButton.addTarget(self, action: #selector(didTapsetancorButton), for: .touchUpInside)
+        //setancorButton.addTarget(self, action: #selector(didTapsetancorButton), for: .touchUpInside)
         //savecatchButton.addTarget(self, action: #selector(didTapsavecatchButton), for: .touchUpInside)
         savecurrentButton.addTarget(self, action: #selector(didTapsavecurrentButton), for: .touchUpInside)
         savecatchButton.isHidden = true
+        setancorButton.isHidden = true
         closeButton.addTarget(self, action: #selector(didTapcloseButton), for: .touchUpInside)
         addButton.addTarget(self, action: #selector(didTapaddButton), for: .touchUpInside)
         backButton.addTarget(self, action: #selector(didTapbackButton), for: .touchUpInside)
@@ -267,8 +270,8 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
         floatingButton.frame = CGRect(x: view.frame.size.width - 70, y: view.frame.size.height - 70, width: 60, height: 60)
         savecurrentButton.frame = CGRect(x: view.frame.size.width - 50, y: view.frame.size.height - 120, width: 40, height: 40)
         //savecatchButton.frame = CGRect(x: view.frame.size.width - 50, y: view.frame.size.height - 170, width: 40, height: 40)
-        setancorButton.frame = CGRect(x: view.frame.size.width - 50, y: view.frame.size.height - 170, width: 40, height: 40)
-        measureButton.frame = CGRect(x: view.frame.size.width - 50, y: view.frame.size.height - 220, width: 40, height: 40)
+        //setancorButton.frame = CGRect(x: view.frame.size.width - 50, y: view.frame.size.height - 220, width: 40, height: 40)
+        measureButton.frame = CGRect(x: view.frame.size.width - 50, y: view.frame.size.height - 170, width: 40, height: 40)
         aimImage.frame = CGRect(x: (view.frame.size.width / 2) - 20, y: (view.frame.size.height / 2) + 20, width: 40, height: 40)
         closeButton.frame = CGRect(x: view.frame.size.width - 70, y: view.frame.size.height - 70, width: 60, height: 60)
         addButton.frame = CGRect(x: view.frame.size.width - 120, y: view.frame.size.height - 55, width: 40, height: 40)
@@ -334,7 +337,7 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
             tik = true
             //Control Buttons are open..
             measureButton.isHidden = false
-            setancorButton.isHidden = false
+            //setancorButton.isHidden = false
             //savecatchButton.isHidden = false
             savecurrentButton.isHidden = false
         } else {
@@ -343,7 +346,7 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
             tik = false
             //Control Buttons are close..
             measureButton.isHidden = true
-            setancorButton.isHidden = true
+            //setancorButton.isHidden = true
             //savecatchButton.isHidden = true
             savecurrentButton.isHidden = true
         }
@@ -370,6 +373,8 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
         totalLabel.text = "Total length: "
         pointcountLabel.isHidden = false
         pointcountLabel.text = "Points count: 1"
+        locationManager.stopUpdatingLocation()
+        
     }
     
     @objc private func didTapsetancorButton() {
@@ -412,35 +417,114 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
             totalLabel.isHidden = true
             pointcountLabel.isHidden = true
             mapView.removeOverlays(mapView.overlays)
-       // }
+            locationManager.startUpdatingLocation()
+        //Measurement clears
+        mapView.removeOverlays(mapView.overlays)
+        totalLabel.text = "Total length: "
+        addInt = 0
+        secondLoc.removeAll()
+        firstLoc.removeAll()
+        distanceArray.removeAll()
+        desCoordinate.removeAll()
+        polyLine.removeAll()       // }
     }
+
+    //Measurement Controls
+    
+    var addInt: Int = 0
+    var secondLoc = [CLLocation]()
+    var firstLoc = [CLLocation]()
+    var distanceArray = [CLLocationDistance]()
+    var desCoordinate = [CLLocationCoordinate2D]()
+    var polyLine = [MKPolyline]()
+    var distance = String()
+    
     
     @objc private func didTapaddButton() {
         //getDirection()
+        if addInt == 0 {
         mapView.removeOverlays(mapView.overlays)
-        let destinationCoordinate   = getCenterLocation(for: mapView).coordinate
-        let firsLocation = CLLocation(latitude:weatherLocation.latitude, longitude:weatherLocation.longitude)
-        let secondLocation = CLLocation(latitude: destinationCoordinate.latitude, longitude: destinationCoordinate.longitude)
+            desCoordinate.append(getCenterLocation(for: mapView).coordinate)
+            firstLoc.append(CLLocation(latitude:weatherLocation.latitude, longitude:weatherLocation.longitude))
+            secondLoc.append(CLLocation(latitude: desCoordinate[addInt].latitude, longitude: desCoordinate[addInt].longitude))
+            distanceArray.append(firstLoc[addInt].distance(from: secondLoc[addInt]) / 1000)
+            var coordinates = [weatherLocation, desCoordinate[addInt]]
+            // Add polyline arrays.
+            polyLine.append(MKPolyline(coordinates: &coordinates, count: coordinates.count))
+            mapView.addOverlay(polyLine[addInt])
+            firstLoc.append(CLLocation(latitude: desCoordinate[addInt].latitude, longitude: desCoordinate[addInt].longitude))
         
-        let distance: CLLocationDistance = firsLocation.distance(from: secondLocation) / 1000
-        totalLabel.text = "Total length: \(String(format:"%.02f", distance))KM"
-        //KM ve MIL olarak çalışma yapılacak.
-        var coordinates = [weatherLocation, destinationCoordinate]
-        // Create polyline.
-        let myPolyLine: MKPolyline = MKPolyline(coordinates: &coordinates, count: coordinates.count)
-        mapView.addOverlay(myPolyLine)
-        //Bu kısım döngüye alınıp cizdikçe mesafe toplam yazacak point sayısı ile
-        
+            let  totalDistance = firstLoc.dropFirst().reduce((firstLoc.first!, 0.0)) {  ($1 , $0.1 + $0.0.distance(from: $1)) }.1
+            if (Locale.current.usesMetricSystem == false) {
+                distance = "mi"
+                totalLabel.text = "Total length: \(String(format:"%.01f", totalDistance / 1609.344)) \(distance)"
+            }else {
+               distance = "km"
+                totalLabel.text = "Total length: \(String(format:"%.02f", totalDistance / 1000)) \(distance)"
+            }
+        addInt = +1
+            //Add Points
+        }else if addInt > 0 {
+            desCoordinate.append(getCenterLocation(for: mapView).coordinate)
+            secondLoc.append(CLLocation(latitude: desCoordinate[addInt].latitude, longitude: desCoordinate[addInt].longitude))
+            distanceArray.append(firstLoc[addInt].distance(from: secondLoc[addInt]) / 1000)
+            var coordinates = [firstLoc[addInt].coordinate, desCoordinate[addInt]]
+            // Add polyline arrays.
+            polyLine.append(MKPolyline(coordinates: &coordinates, count: coordinates.count))
+            mapView.addOverlay(polyLine[addInt])
+            firstLoc.append(CLLocation(latitude: desCoordinate[addInt].latitude, longitude: desCoordinate[addInt].longitude))
+            let  totalDistance = firstLoc.dropFirst().reduce((firstLoc.first!, 0.0)) {  ($1 , $0.1 + $0.0.distance(from: $1)) }.1
+            if (Locale.current.usesMetricSystem == false) {
+                distance = "mi"
+                totalLabel.text = "Total length: \(String(format:"%.01f", totalDistance / 1609.344)) \(distance)"
+            }else {
+               distance = "km"
+                totalLabel.text = "Total length: \(String(format:"%.02f", totalDistance / 1000)) \(distance)"
+            }
+            addInt = addInt + 1
+        }
     }
     
     @objc private func didTapbackButton() {
         //point remove !
-        mapView.removeOverlays(mapView.overlays)
-        totalLabel.text = "Total length: "
+        if addInt < 1 {
+            addInt = 0
+            secondLoc.removeAll()
+            firstLoc.removeAll()
+            distanceArray.removeAll()
+            desCoordinate.removeAll()
+            polyLine.removeAll()
+            
+        }else {
+        addInt = addInt - 1
+        mapView.removeOverlay(polyLine[addInt])
+        secondLoc.removeLast()
+        firstLoc.removeLast()
+        distanceArray.removeLast()
+        desCoordinate.removeLast()
+        polyLine.removeLast()
+            let  totalDistance = firstLoc.dropFirst().reduce((firstLoc.first!, 0.0)) {  ($1 , $0.1 + $0.0.distance(from: $1)) }.1
+            if (Locale.current.usesMetricSystem == false) {
+                distance = "mi"
+                totalLabel.text = "Total length: \(String(format:"%.01f", totalDistance / 1609.344)) \(distance)"
+            }else {
+               distance = "km"
+                totalLabel.text = "Total length: \(String(format:"%.02f", totalDistance / 1000)) \(distance)"
+            }
+        }
+        
+        
+        
     }
     @objc private func didTapclearButton() {
         mapView.removeOverlays(mapView.overlays)
         totalLabel.text = "Total length: "
+        addInt = 0
+        secondLoc.removeAll()
+        firstLoc.removeAll()
+        distanceArray.removeAll()
+        desCoordinate.removeAll()
+        polyLine.removeAll()
     }
     
     
@@ -651,8 +735,8 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
         switch named {
         case .buying:
             performSegue(withIdentifier: "buying", sender: nil)
-        case .map:
-            performSegue(withIdentifier: "buying", sender: nil)
+        //case .map:
+         //   performSegue(withIdentifier: "buying", sender: nil)
         case .locations:
             performSegue(withIdentifier: "locations", sender: nil)
         case .fishing:
@@ -661,8 +745,8 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
             performSegue(withIdentifier: "weather", sender: nil)
         case .solunar:
             performSegue(withIdentifier: "solunar", sender: nil)
-        case .settings:
-            performSegue(withIdentifier: "settings", sender: nil)
+        //case .settings:
+            //performSegue(withIdentifier: "settings", sender: nil)
         case .about:
             performSegue(withIdentifier: "about", sender: nil)
         }

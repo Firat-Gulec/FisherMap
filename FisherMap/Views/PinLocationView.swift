@@ -23,6 +23,7 @@ class PinLocationView: UIViewController, MKMapViewDelegate, CLLocationManagerDel
     var currentLocation = CLLocationCoordinate2D()
     var annonation = MKPointAnnotation()
     var delegate: MyProtocol?
+    var favButton: Bool = true
     
     
     @IBOutlet weak var slideIdicator: UIView!
@@ -83,6 +84,15 @@ class PinLocationView: UIViewController, MKMapViewDelegate, CLLocationManagerDel
     
     
     @IBAction func favoriteButton(_ sender: Any) {
+        if favButton == true {
+            favButton = false
+            favoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            favoriteButton.tintColor = .systemPink
+        }else {
+            favButton = true
+            favoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            favoriteButton.tintColor = .systemPink
+        }
         
     }
     
@@ -117,7 +127,7 @@ class PinLocationView: UIViewController, MKMapViewDelegate, CLLocationManagerDel
     
     @IBAction func saveBtn(_ sender: Any) {
         
-        createItem(cLat: currentLocation.latitude, cLon: currentLocation.longitude, createDate: createDatePicker.date, imageName: "fishing.png", locName: titleTextField.text!, locNote: noteTextField.text!, favorite: true, locSub: subtitleTextField.text!)
+        createItem(cLat: currentLocation.latitude, cLon: currentLocation.longitude, createDate: createDatePicker.date, imageName: "fishing.png", locName: titleTextField.text!, locNote: noteTextField.text!, favorite: favButton, locSub: subtitleTextField.text!)
         delegate?.sendData(coordinate: currentLocation , title: titleTextField.text!, subtitle: subtitleTextField.text!)
                 self.dismiss(animated: true) {
                     //Image ve Seçimi ve açıklamaları eklenecek!

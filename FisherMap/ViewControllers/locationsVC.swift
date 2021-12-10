@@ -47,6 +47,7 @@ class locationsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         let celliteme = cellitems[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! LocationCell
         cell.usernameLabel.text = celliteme.locName
+        cell.messageTextLabel.text = celliteme.locSub
         cell.imageView?.image = UIImage(named: celliteme.imageName!)
         cell.favoriteImageView.isHidden = celliteme.favorite
         

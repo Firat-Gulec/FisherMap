@@ -83,6 +83,7 @@
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lXH-ov-6Ko">
                     <rect key="frame" x="78" y="353" width="260" height="41"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="tintColor" systemColor="systemPinkColor"/>
                     <buttonConfiguration key="configuration" style="gray" title="Favorite" titleAlignment="automatic">
                         <imageReference key="image" image="heart" catalog="system" symbolScale="large" renderingMode="hierarchical">
                             <hierarchicalColors>

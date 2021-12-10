@@ -20,6 +20,7 @@ class LocationCell: UITableViewCell {
             }
             profileImageView.image = UIImage(named: cellitem.imageName)
             usernameLabel.text = cellitem.locName
+            messageTextLabel.text = cellitem.locSub
             favoriteImageView.isHidden = !cellitem.favorite
         }
     }
