@@ -134,7 +134,6 @@ extension aboutVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("\(data[indexPath.row].url)")
         //Write actions
         let selection = data[indexPath.row].url
         if selection == "rateapp" {

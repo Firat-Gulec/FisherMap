@@ -62,25 +62,36 @@ class locationsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     //Empty
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(cellitems[indexPath.row].favorite)
+       
+        
     }
     
     
     //Leading Swipe Actions
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    /*   func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         // GO..
-        let goAction = UIContextualAction(style: .normal, title: "GO") { (action, view, completionHandler) in
+      let goAction = UIContextualAction(style: .normal, title: "GO") { (action, view, completionHandler) in
             //go action
+            let cellitem = self.cellitems[indexPath.row]
+            //self.dismiss(animated: true, completion: nil)
+            //
+            let vc = LocPinView()
             
+            //c.sideMenu?.dismiss(animated: true, completion: nil)
+            //vc.pinLocation(pinlocation: CLLocationCoordinate2D(latitude: cellitem.cLat, longitude: cellitem.cLon), createDate: cellitem.createDate!, imageName: cellitem.imageName!, locName: cellitem.locName!, locNote: cellitem.locNote!, favorite: cellitem.favorite, locSub: cellitem.locSub!)
+            //vc.modalPresentationStyle = .custom
+            //vc.transitioningDelegate = self
+            //vc.delegate = self
             
-            
-            
-            completionHandler(true)
+            //self.present(vc, animated: true, completion: nil )
+           
+           
+           // completionHandler(true)
         }
         goAction.backgroundColor = .systemGreen
         let swipe = UISwipeActionsConfiguration(actions: [goAction])
         return swipe
-    }
+    }*/
     
     //Edit Rows Actions
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -95,9 +106,9 @@ class locationsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         // FAVORITE..
         let actionTitle = cellitems[indexPath.row].favorite ? "Unfavorite" : "Favorite"
         let favoriteAction = UITableViewRowAction(style: .normal, title: actionTitle) { [self] (action, indexPath) in
-            var cellitem = self.cellitems[indexPath.row]
+            let cellitem = self.cellitems[indexPath.row]
             cellitem.favorite.toggle()
-            let cell = tableView.cellForRow(at: indexPath) as! LocationCell
+            //let cell = tableView.cellForRow(at: indexPath) as! LocationCell
             self.cellitems[indexPath.row] = cellitem
             self.tableView.reloadRows(at: [indexPath], with: .automatic)
             

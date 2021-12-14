@@ -30,7 +30,6 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
     func sendData(coordinate: CLLocationCoordinate2D, title: String, subtitle: String, note: String, favorite: Bool) {
         let pinAnnonation = AnnonationModel(title: title, subtitle: subtitle, coordinate: coordinate, info: note, favorite: favorite, createDate: Date())
         mapView.addAnnotation(pinAnnonation)
-        print(pinAnnonation.title ?? "Gelmedi")
         mapView.reloadInputViews()
        
     }
@@ -51,7 +50,6 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
                     
                     let pinAnnonation = AnnonationModel(title: cellitem.locName ?? "error", subtitle: cellitem.locSub ?? "error", coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(cellitem.cLat), longitude: CLLocationDegrees(cellitem.cLon)), info: cellitem.locNote ?? " ", favorite: cellitem.favorite, createDate: Date())
                     self.mapView.addAnnotation(pinAnnonation)
-                    print(pinAnnonation.title ?? "Gelmedi")
                     self.mapView.reloadInputViews()
                     
                 }
@@ -754,7 +752,7 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
     // MARK: - SideMenu all controls..
     
     //Create SideMenu
-    private var sideMenu: SideMenuNavigationController?
+    public var sideMenu: SideMenuNavigationController?
   
     //Menu Button Click
     @IBAction func menuBtn(_ sender: Any) {
@@ -804,7 +802,7 @@ extension ViewController: UIViewControllerTransitioningDelegate {
 
 
 extension ViewController: MKMapViewDelegate {
-    
+/*
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         let center = getCenterLocation(for: mapView)
         let geoCoder = CLGeocoder()
@@ -835,7 +833,7 @@ extension ViewController: MKMapViewDelegate {
             }
         }
     }
-    
+   */
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
         renderer.strokeColor = .blue

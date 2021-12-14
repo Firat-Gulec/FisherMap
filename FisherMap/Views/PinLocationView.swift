@@ -42,9 +42,6 @@ class PinLocationView: UIViewController, MKMapViewDelegate, CLLocationManagerDel
         super.viewDidLoad()
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognizerAction))
         view.addGestureRecognizer(panGesture)
-        print(currentLocation)
-    
-    
         slideIdicator.roundCorners(.allCorners, radius: 10)
         //subscribeButton.roundCorners(.allCorners, radius: 10)
     }

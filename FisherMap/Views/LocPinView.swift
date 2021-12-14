@@ -134,6 +134,6 @@ class LocPinView: UIViewController,  CLLocationManagerDelegate, MKMapViewDelegat
     
     //Get item
     func getItem(item: Locationdata ) {
-           print(item.locName!)
+           
     }
 }

@@ -85,7 +85,6 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
         gmtChar = "\(TimeZone.current.abbreviation()!)"
         //tarih çek
         let now = moonDatePicker.date
-        print("\(TimeZone.current.abbreviation()!)")
         let formatter = DateFormatter()
         formatter.timeZone = TimeZone.current
         formatter.dateFormat = "yyyyMMdd"
@@ -148,7 +147,6 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(currentLocation)
         self.startAnimation()
         
     }
@@ -187,7 +185,6 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
             
             //burada çalışmak gerek son 2 yerine ilk 3 sonrası almak için! +11 sidney patlak
             self.gmtChar = "\(TimeZone.current.abbreviation()!)"
-            print(String(self.gmtChar.suffix(2)))
             self.fetchMoon(lat: "\(self.currentLocation.latitude)", lon: "\(self.currentLocation.longitude)", date: "\(formatter.string(from: now))", locTime: String(self.gmtChar.suffix(2)))
         }
     }
@@ -208,7 +205,6 @@ class weatherVC: UIViewController,  CLLocationManagerDelegate {
                                                      from: data)
                 DispatchQueue.main.async {
                     self.degree = Double(.pi * (model.sunRiseDec ?? 1.99968) / 180) * 1000
-                    print("\(self.degree)")
                     self.mTypeImage.image = UIImage(named: model.moonPhase ?? "00:00")
                     self.moonDescLabel.text = model.moonPhase?.wlocalized()
                     self.moonPhaseLabel.text = "\(Int(model.moonIllumination ?? 0.0 * 100))%"

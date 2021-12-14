@@ -28,7 +28,6 @@ class solunarVC: UIViewController{
     @IBOutlet weak var wfImageView: UIImageView!
     @IBOutlet weak var wftempHLLabel: UILabel!
     @IBOutlet weak var wfDescLabel: UILabel!
-    
     @IBOutlet weak var hourlyLabel: UILabel!
     @IBOutlet weak var weeklyLabel: UILabel!
     
@@ -99,7 +98,6 @@ class solunarVC: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(currentLocation)
        // list.removeAll()
          temp.removeAll()
          temp_max.removeAll()
@@ -207,19 +205,22 @@ class solunarVC: UIViewController{
                                         self.humidity.append("\(i.main.humidity)")
                                         self.dt_txt.append("\(i.dt_txt)")
                                         self.visib.append("\(i.visibility)")
-                                        print("Temp : \(i.main.temp)")
+                                    /*    print("Temp : \(i.main.temp)")
                                         print("Temp Max : \(i.main.temp_max)")
                                         print("Temp Min : \(i.main.temp_min)")
                                         print("Feels Like : \(i.main.feels_like)")
                                         print("Humidity : \(i.main.humidity)")
                                         print("Date : \(i.dt_txt)")
                                         print("Date : \(i.visibility)")
+                                     */
                                    for j in i.weather {
                                        self.main.append(j.main)
                                        self.descrip.append("\(j.description)")
-                                           print("Main : \(j.main)")
-                                           print("Description : \(j.description)")
-                                           print("Icon : \(j.icon)")
+                                      /*
+                                            print("Main : \(j.main)")
+                                            print("Description : \(j.description)")
+                                            print("Icon : \(j.icon)")
+                                       */
                                        }
                                           /*  for j in i.clouds {
                                                 print("Clouds : \(j.all)")
@@ -325,8 +326,7 @@ class solunarVC: UIViewController{
         humidityCView.layer.masksToBounds = true
         
          //tarih çek
-         let now = Date()
-         print("\(TimeZone.current.abbreviation()!)")
+         
          let formatter = DateFormatter()
          formatter.timeZone = TimeZone.current
          formatter.dateFormat = "yyyyMMdd"

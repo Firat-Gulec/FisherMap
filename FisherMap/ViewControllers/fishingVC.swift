@@ -46,7 +46,6 @@ class fishingVC: UIViewController, ChartViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(currentLocation)
         lineChart.delegate = self
         self.startAnimation()
         
@@ -68,7 +67,6 @@ class fishingVC: UIViewController, ChartViewDelegate {
             loading.stopAnimating()
             //tarih çek
             let now = self.dayDatePicker.date
-            print("\(TimeZone.current.abbreviation()!)")
             let formatter = DateFormatter()
             formatter.timeZone = TimeZone.current
             formatter.dateFormat = "yyyyMMdd"
@@ -155,13 +153,12 @@ class fishingVC: UIViewController, ChartViewDelegate {
                                }
                     let symbolssorted = self.hourlySymbols.enumerated().sorted(by: {$0.element < $1.element})
                     let sybolson = symbolssorted.map{$0.offset}
-                    //print("\(self.hourlyValues)")
                     entries.removeAll()
-                    self.dayDiscLabel.text = "\(model.dayRating)"
-                    self.majorstartLabel.text = "\(model.major1Start!) - \(model.major1Stop!)"
-                    self.majorstopLabel.text = "\(model.major2Start!) - \(model.major2Stop!)"
-                    self.minorstartLabel.text = "\(model.minor1Start!) - \(model.minor1Stop!)"
-                    self.minorstopLabel.text = "\(model.minor2Start!) - \(model.minor2Stop!)"
+                    self.dayDiscLabel.text = "\(String(describing: model.dayRating))"
+                    self.majorstartLabel.text = "\(model.major1Start ?? "null") - \(model.major1Stop ?? "null")"
+                    self.majorstopLabel.text = "\(model.major2Start ?? "null") - \(model.major2Stop ?? "null")"
+                    self.minorstartLabel.text = "\(model.minor1Start ?? "null") - \(model.minor1Stop ?? "null")"
+                    self.minorstopLabel.text = "\(model.minor2Start ?? "null") - \(model.minor2Stop ?? "null")"
                     self.lineChart.rightAxis.enabled = false
                     self.lineChart.leftAxis.labelPosition = .outsideChart
                     self.lineChart.leftAxis.labelFont = .boldSystemFont(ofSize: 12)
@@ -195,7 +192,6 @@ class fishingVC: UIViewController, ChartViewDelegate {
                     let linedata = LineChartData(dataSet: set)
                     linedata.setDrawValues(false)
                     self.lineChart.data = linedata
-                    print("burda test")
                     self.lineChart.animate(xAxisDuration: 2.0)
                     self.fishGraphicView.isHidden = false
                     self.fishingTimeView.isHidden = false
