@@ -128,7 +128,7 @@ class PinLocationView: UIViewController, MKMapViewDelegate, CLLocationManagerDel
     @IBAction func saveBtn(_ sender: Any) {
         
         createItem(cLat: currentLocation.latitude, cLon: currentLocation.longitude, createDate: createDatePicker.date, imageName: "fishing.png", locName: titleTextField.text!, locNote: noteTextField.text!, favorite: favButton, locSub: subtitleTextField.text!)
-        delegate?.sendData(coordinate: currentLocation , title: titleTextField.text!, subtitle: subtitleTextField.text!)
+        delegate?.sendData(coordinate: currentLocation , title: titleTextField.text!, subtitle: subtitleTextField.text!, note: noteTextField.text!, favorite: favButton)
                 self.dismiss(animated: true) {
                     //Image ve Seçimi ve açıklamaları eklenecek!
                 }

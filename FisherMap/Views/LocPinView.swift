@@ -1,5 +1,5 @@
 //
-//  OverlayView.swift
+//  LocPinView.swift
 //  FisherMap
 //
 //  Created by Fırat GÜLEÇ on 18.01.2021.
@@ -15,6 +15,7 @@ class LocPinView: UIViewController,  CLLocationManagerDelegate, MKMapViewDelegat
     var pointOrigin: CGPoint?
     
     var currentLocation = CLLocationCoordinate2D()
+    var goLocation = CLLocationCoordinate2D()
     var locName = String()
     var subName = String()
     var locNote = String()
@@ -33,6 +34,10 @@ class LocPinView: UIViewController,  CLLocationManagerDelegate, MKMapViewDelegat
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var slideIdicator: UIView!
 
+    @IBOutlet weak var goButton: UIButton!
+    @IBOutlet weak var nameexpLabel: UILabel!
+    @IBOutlet weak var noteexpLabel: UILabel!
+    @IBOutlet weak var subexpLabel: UILabel!
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "mainVC" {
@@ -63,9 +68,17 @@ class LocPinView: UIViewController,  CLLocationManagerDelegate, MKMapViewDelegat
     }
     
     override func viewDidLayoutSubviews() {
-        nameLabel.frame = CGRect(x: 20, y: 270, width: view.frame.size.width - 50, height: 35)
-        subLabel.frame = CGRect(x: 20, y: 310, width: view.frame.size.width - 50, height: 35)
-        noteLabel.frame = CGRect(x: 20, y: 350, width: view.frame.size.width - 50, height: 35)
+        
+        
+        
+        nameexpLabel.frame = CGRect(x: 20, y: 250, width: view.frame.size.width - 50, height: 10)
+        nameLabel.frame = CGRect(x: 20, y: 261, width: view.frame.size.width - 50, height: 20)
+        subexpLabel.frame = CGRect(x: 20, y: 290, width: view.frame.size.width - 50, height: 10)
+        subLabel.frame = CGRect(x: 20, y: 301, width: view.frame.size.width - 50, height: 20)
+        noteexpLabel.frame = CGRect(x: 20, y: 330, width: view.frame.size.width - 50, height: 10)
+        noteLabel.frame = CGRect(x: 20, y: 341, width: view.frame.size.width - 50, height: 20)
+        goButton.frame = CGRect(x: view.frame.size.width - 100, y: view.frame.size.height - 80, width: 80, height: 60)
+        
         if !hasSetPointOrigin {
             hasSetPointOrigin = true
             pointOrigin = self.view.frame.origin
@@ -79,6 +92,17 @@ class LocPinView: UIViewController,  CLLocationManagerDelegate, MKMapViewDelegat
     @IBAction func favoriteButton(_ sender: Any) {
         
     }
+    
+    @IBAction func goButton(_ sender: Any) {
+        delegate?.goData(coordinate: goLocation)
+        self.dismiss(animated: true) {
+            //Image ve Seçimi ve açıklamaları eklenecek!
+        }
+        
+        
+    }
+    
+    
     
     @objc func panGestureRecognizerAction(sender: UIPanGestureRecognizer) {
         let translation = sender.translation(in: view)

@@ -19,8 +19,14 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
         getAllAnnonations()
     }
     
-    func sendData(coordinate: CLLocationCoordinate2D, title: String, subtitle: String) {
-        let pinAnnonation = AnnonationModel(title: title, subtitle: subtitle, coordinate: coordinate, info: "test", favorite: true, createDate: Date())
+    func goData(coordinate: CLLocationCoordinate2D) {
+        goLocation = coordinate
+        getDirection()
+        
+    }
+    
+    func sendData(coordinate: CLLocationCoordinate2D, title: String, subtitle: String, note: String, favorite: Bool) {
+        let pinAnnonation = AnnonationModel(title: title, subtitle: subtitle, coordinate: coordinate, info: note, favorite: favorite, createDate: Date())
         mapView.addAnnotation(pinAnnonation)
         print(pinAnnonation.title ?? "Gelmedi")
         mapView.reloadInputViews()
@@ -61,6 +67,7 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
     var locationManager = CLLocationManager()
     //var annonation = MKPointAnnotation()
     //weatherForcast Location
+    var goLocation = CLLocationCoordinate2D()
     var weatherLocation = CLLocationCoordinate2D()
     var previousLocation: CLLocation?
     let geoCoder = CLGeocoder()
@@ -95,9 +102,9 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
             //TODO: Handle error if needed
             guard let response = response else { return } //TODO: Show response not available in an alert
             for route in response.routes{
+                let step = route.s
                 self.mapView.addOverlay(route.polyline)
-                
-               // self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+               self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
             }
             
         }
@@ -109,9 +116,9 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
         directionsArray.append(directions)
         let _ = directionsArray.map { $0.cancel() }
     }
-    
+
     func createDirectionsRequest(from coordinate: CLLocationCoordinate2D) -> MKDirections.Request {
-        let destinationCoordinate   = getCenterLocation(for: mapView).coordinate
+        let destinationCoordinate   = goLocation
         let startingLocation        = MKPlacemark(coordinate: coordinate)
         let destination             = MKPlacemark(coordinate: destinationCoordinate)
         
@@ -121,6 +128,7 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
         request.destination     = MKMapItem(placemark: destination)
         //request.transportType   = .transit
         //request.requestsAlternateRoutes = true
+        
         return request
     }
     
@@ -141,6 +149,7 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
         vc.locName = locName
         vc.subName = locSub
         vc.locNote = locNote
+        vc.goLocation = pinlocation
         vc.favorite = favorite
         vc.createDate = createDate
         vc.locImage = imageName 
@@ -782,7 +791,7 @@ extension ViewController: MKMapViewDelegate {
         self.previousLocation = center
         
         geoCoder.reverseGeocodeLocation(center) { [weak self] (placemarks, error) in
-            guard let self = self else { return }
+            guard self != nil else { return }
             
             if let _ = error {
                 //TODO: Show alert informing the user
@@ -818,7 +827,8 @@ extension ViewController: MKMapViewDelegate {
 // MARK: - My protocols here..
 
 protocol MyProtocol: AnyObject {
-    func sendData(coordinate: CLLocationCoordinate2D , title: String, subtitle: String)
+    func sendData(coordinate: CLLocationCoordinate2D , title: String, subtitle: String, note: String, favorite: Bool)
+    func goData(coordinate: CLLocationCoordinate2D)
     func sendmapType(mapType: MKMapType)
 }
 
