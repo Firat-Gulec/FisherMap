@@ -71,6 +71,10 @@ class locationsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         // GO..
         let goAction = UIContextualAction(style: .normal, title: "GO") { (action, view, completionHandler) in
             //go action
+            
+            
+            
+            
             completionHandler(true)
         }
         goAction.backgroundColor = .systemGreen
@@ -105,13 +109,13 @@ class locationsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
                             }
         }
         // EDIT..
-        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
+      /*  let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
             //Edit Action - Update action..
-        }
+        } */
         
         favoriteAction.backgroundColor = UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)
-        editAction.backgroundColor = .systemYellow
-        return [deleteAction, favoriteAction, editAction]
+       // editAction.backgroundColor = .systemYellow
+        return [deleteAction, favoriteAction]
     }
     
     

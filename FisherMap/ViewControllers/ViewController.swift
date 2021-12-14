@@ -21,7 +21,9 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
     
     func goData(coordinate: CLLocationCoordinate2D) {
         goLocation = coordinate
-        getDirection()
+       // getDirection()
+        goLocationManager(startingLocation: weatherLocation, destinationLocation: goLocation)
+        
         
     }
     
@@ -89,12 +91,26 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
         startTackingUserLocation()
     }
     
+    var gopolyLine = MKPolyline()
+    var goControl = false
+    
+    func goLocationManager(startingLocation: CLLocationCoordinate2D, destinationLocation: CLLocationCoordinate2D) {
+        var coordinates = [startingLocation, destinationLocation]
+        // Add polyline arrays.
+        gopolyLine = MKPolyline(coordinates: &coordinates, count: coordinates.count)
+        mapView.addOverlay(gopolyLine)
+        //mapView.setVisibleMapRect(gopolyLine.boundingMapRect, animated: true) //??
+        closeButton.isHidden = false
+        goControl = true
+    }
+    
+  /*
+    
     func getDirection() {
         guard let currentLocation = locationManager.location?.coordinate else {
             //TODO: Inform user we don't have their current location
             return
         }
-         
         let request = createDirectionsRequest(from: currentLocation)
         let directions = MKDirections(request: request)
         resetMapView(withNew: directions)
@@ -102,13 +118,10 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
             //TODO: Handle error if needed
             guard let response = response else { return } //TODO: Show response not available in an alert
             for route in response.routes{
-                let step = route.s
                 self.mapView.addOverlay(route.polyline)
-               self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+                self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
             }
-            
         }
-        
     }
     
     func resetMapView(withNew directions: MKDirections) {
@@ -116,13 +129,14 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
         directionsArray.append(directions)
         let _ = directionsArray.map { $0.cancel() }
     }
+    
+    
 
     func createDirectionsRequest(from coordinate: CLLocationCoordinate2D) -> MKDirections.Request {
         let destinationCoordinate   = goLocation
         let startingLocation        = MKPlacemark(coordinate: coordinate)
         let destination             = MKPlacemark(coordinate: destinationCoordinate)
         
-       
         let request                 = MKDirections.Request()
         request.source          = MKMapItem(placemark: startingLocation)
         request.destination     = MKMapItem(placemark: destination)
@@ -132,6 +146,8 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
         return request
     }
     
+    */
+    
     // Alınan Konuma gitme yakınlaştırma..
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = CLLocationCoordinate2D(latitude: locations[0].coordinate.latitude, longitude: locations[0].coordinate.longitude)
@@ -139,6 +155,13 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
         let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         let region = MKCoordinateRegion(center: locationManager.location!.coordinate, span: span)
         mapView.setRegion(region, animated: true)
+        if goControl == true {
+            mapView.removeOverlay(gopolyLine)
+            var coordinates = [weatherLocation, goLocation]
+            // Add polyline arrays.
+            gopolyLine = MKPolyline(coordinates: &coordinates, count: coordinates.count)
+            mapView.addOverlay(gopolyLine)
+        }
     }
     
     //Show pin location view action ...
@@ -183,8 +206,8 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
     func startTackingUserLocation() {
         mapView.showsUserLocation = true
         locationManager.startUpdatingLocation()
-        
         previousLocation = getCenterLocation(for: mapView)
+        
     }
     
  
@@ -193,7 +216,6 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
         guard annotation is AnnonationModel else { return nil }
         
         let identifier = "AnnotationModel"
-        
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
         if annotationView == nil {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
@@ -435,7 +457,9 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
         firstLoc.removeAll()
         distanceArray.removeAll()
         desCoordinate.removeAll()
-        polyLine.removeAll()       // }
+        polyLine.removeAll()
+        goControl = false
+        // }
     }
 
     //Measurement Controls
