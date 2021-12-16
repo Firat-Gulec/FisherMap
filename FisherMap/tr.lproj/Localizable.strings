@@ -1,6 +1,6 @@
 //SideMenu Strings
 "Start 7- Day Free Trial" = "7 Gün Bedava Kullanım";
-"Map" = "Harita";
+"How to Use?" = "Nasıl Kullanılır?";
 "Locations" = "Konumlar";
 "Catches" = "Kaçırılanlar";
 "Weather" = "Hava Durumu";
@@ -8,7 +8,7 @@
 "Settings" = "Ayarlar";
 "Help" = "Yardım";
 "About" = "Hakkında";
-"Fishing Points" = "Balık Noktaları";
+"Fishing Map" = "Balık Noktaları";
 "Current conditions" = "Mevcut Koşullar";
 "SUNSET" = "GÜN DOĞUMU";
 "SUNRISE" = "GÜN BATIŞI";
@@ -21,5 +21,10 @@
 "Third Quarther" = "Son Dördün Ay";
 "Full Moon" = "Dolunay";
 "New Moon" = "Yeni Ay";
-
+"Total length: " = "Toplam Uzunluk:";
+"Hourly Data" = "Saatlik Data";
+"Favorite" = "Favori";
+"Unfavorite" = "Unfavorite";
+"Delete" = "Sil";
+"Fishing Points" = "Balık Noktaları";
 

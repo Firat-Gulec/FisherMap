@@ -174,7 +174,7 @@ class fishingVC: UIViewController, ChartViewDelegate {
                     for sort in sybolson {
                         entries.append(ChartDataEntry(x: Double(sybolson[sort]), y: Double(self.hourlyValues[sybolson[sort]])))
                     }
-                    let set = LineChartDataSet(entries: entries, label: "Hourly Data")
+                    let set = LineChartDataSet(entries: entries, label: "Hourly Data".localized())
                     set.label = ""
                     set.drawCirclesEnabled = false
                     set.mode = .cubicBezier

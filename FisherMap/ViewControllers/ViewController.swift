@@ -449,7 +449,7 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
             locationManager.startUpdatingLocation()
         //Measurement clears
         mapView.removeOverlays(mapView.overlays)
-        totalLabel.text = "Total length: "
+        totalLabel.text = "Total length: ".localized()
         addInt = 0
         secondLoc.removeAll()
         firstLoc.removeAll()
@@ -549,7 +549,7 @@ class ViewController: UIViewController,  CLLocationManagerDelegate,  MenuControl
     }
     @objc private func didTapclearButton() {
         mapView.removeOverlays(mapView.overlays)
-        totalLabel.text = "Total length: "
+        totalLabel.text = "Total length: ".localized()
         addInt = 0
         secondLoc.removeAll()
         firstLoc.removeAll()

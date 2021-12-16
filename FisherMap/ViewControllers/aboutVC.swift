@@ -28,9 +28,9 @@ class aboutVC: UIViewController {
         AboutData(title: "Report bugs and problems", url: "sendbugs", backgroundImage: #imageLiteral(resourceName: "islandZero")),
         AboutData(title: "Make a feature request", url: "sendrequest", backgroundImage: #imageLiteral(resourceName: "islandOne")),
         AboutData(title: "How to use", url: "howtouse", backgroundImage: #imageLiteral(resourceName: "islandZero")),
-        AboutData(title: "Privacy Policy", url: "privacy", backgroundImage: #imageLiteral(resourceName: "islandThree")),
+        /*AboutData(title: "Privacy Policy", url: "privacy", backgroundImage: #imageLiteral(resourceName: "islandThree")),
         AboutData(title: "Terms of Use", url: "termofuse", backgroundImage: #imageLiteral(resourceName: "islandZero")),
-        AboutData(title: "License", url: "license", backgroundImage: #imageLiteral(resourceName: "islandOne")),
+        AboutData(title: "License", url: "license", backgroundImage: #imageLiteral(resourceName: "islandOne")),*/
     ]
     //setup CollectionView
     fileprivate let collectionView:UICollectionView = {
@@ -159,13 +159,13 @@ extension aboutVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSourc
             self.showMailComposer(subject: "I need This Func!")
         }else if selection == "howtouse" {
             
-        }else if selection == "privacy" {
+        }/*else if selection == "privacy" {
             
         }else if selection == "termofuse" {
             
         }else if selection == "license" {
             
-        }
+        }*/
     }
     
 }

@@ -28,7 +28,7 @@ class locationsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Location List"
+        title = "Fishing Points".localized()
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
@@ -96,7 +96,7 @@ class locationsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     //Edit Rows Actions
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         // DELETE..
-        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete".localized()) { (action, indexPath) in
             let deleteitem = self.cellitems[indexPath.row]
             self.deleteItem(item: deleteitem )
             self.cellitems.remove(at: indexPath.row)
@@ -104,7 +104,7 @@ class locationsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         }
         
         // FAVORITE..
-        let actionTitle = cellitems[indexPath.row].favorite ? "Unfavorite" : "Favorite"
+        let actionTitle = cellitems[indexPath.row].favorite ? "Unfavorite".localized() : "Favorite".localized()
         let favoriteAction = UITableViewRowAction(style: .normal, title: actionTitle) { [self] (action, indexPath) in
             let cellitem = self.cellitems[indexPath.row]
             cellitem.favorite.toggle()
