@@ -185,7 +185,7 @@ class solunarVC: UIViewController{
 
     //Hava Durumu çek kardeş
     func fetchWeatherForecast(lat: String, lon: String, units: String, lang: String, apikey: String) {
-        guard let url = URL(string:  "http://api.openweathermap.org/data/2.5/forecast?lat=\(lat)&lon=\(lon)&units=\(units)&lang=\(lang)&appid=9e934037e50bdf637b1d64f942b8e944") else {
+        guard let url = URL(string:  "http://api.openweathermap.org/data/2.5/forecast?lat=\(lat)&lon=\(lon)&units=\(units)&lang=\(lang)&appid=") else {
                    
         print("Invalid URL")
                    return
