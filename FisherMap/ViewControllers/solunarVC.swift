@@ -122,7 +122,7 @@ class solunarVC: UIViewController{
     func fetchWeather(lat: String, lon: String, units: String, lang: String, apikey: String) {
         self.fetchWeatherForecast(lat: "\(currentLocation.latitude)", lon: "\(currentLocation.longitude)", units: metricSys, lang: langChar, apikey: "")
         
-        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(lon)&units=\(units)&lang=\(lang)&appid=9e934037e50bdf637b1d64f942b8e944")
+        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(lon)&units=\(units)&lang=\(lang)&appid=")
       // Rize yağmur için..
       // guard let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=41.025753&lon=40.524624&units=\(units)&lang=\(lang)&appid=9e934037e50bdf637b1d64f942b8e944")
         else {
